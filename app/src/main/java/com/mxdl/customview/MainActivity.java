@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button mBtnStickyLayout;
     private Button mBtnScrollView;
+    private Button mBtnPinnedHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +27,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         mBtnStickyLayout = findViewById(R.id.btn_sticky_layout);
         mBtnScrollView = findViewById(R.id.btn_scroll_view);
+        mBtnPinnedHeader = findViewById(R.id.btn_pinned_header);
+
         mBtnStickyLayout.setOnClickListener(this);
         mBtnScrollView.setOnClickListener(this);
-
-        HorizontalScrollView scrollView;
-        NestedScrollView h;
+        mBtnPinnedHeader.setOnClickListener(this);
 
     }
 
@@ -42,6 +43,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_scroll_view:
                 startActivity(new Intent(this, HorizontalScrollViewActivity.class));
+                break;
+            case R.id.btn_pinned_header:
+                startActivity(new Intent(this,PinnedHeaderActivity.class));
                 break;
         }
     }

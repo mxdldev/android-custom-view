@@ -30,7 +30,7 @@ public class StickyLayoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sticky_layout);
         mExpandableListView = findViewById(R.id.view_expand_listview);
         mExpandableListView.setAdapter(new ExpandableListViewAdapter(this));
-        for(int i = 0; i < 3; i++){
+        for (int i = 0; i < 3; i++) {
             mExpandableListView.expandGroup(i);
         }
         mExpandableListView.showPinnedHeaderView();
@@ -40,9 +40,9 @@ public class StickyLayoutActivity extends AppCompatActivity {
             @Override
             public boolean giveUpTouchEvent() {
                 int firstVisiblePosition = mExpandableListView.getFirstVisiblePosition();
-                if(firstVisiblePosition == 0){
+                if (firstVisiblePosition == 0) {
                     View view = mExpandableListView.getChildAt(0);
-                    if(view != null && view.getTop() >= 0){
+                    if (view != null && view.getTop() >= 0) {
                         return true;
                     }
                 }

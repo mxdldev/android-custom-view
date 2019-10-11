@@ -7,12 +7,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
         <Button
-            android:id="@+id/btn_scroll_view"
+            android:id="@+id/btn_horizontal_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="HorizontalScrollView"
+            android:textAllCaps="false"
+            />
+        <Button
+            android:id="@+id/btn_horizontal_scroll_view_ex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="HorizontalScrollViewEx"
             android:textAllCaps="false"
             />
         <Button
@@ -27,6 +33,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="StickyLayout"
+            android:textAllCaps="false"
+            />
+        <Button
+            android:id="@+id/btn_capture_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CaptureView"
             android:textAllCaps="false"
             />
     </LinearLayout>

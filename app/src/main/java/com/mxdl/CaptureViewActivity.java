@@ -6,10 +6,11 @@ import android.os.Bundle;
 
 import com.mxdl.customview.R;
 import com.mxdl.customview.view.CaptureView;
+import com.mxdl.customview.view.CenterCaptureView;
 
 public class CaptureViewActivity extends AppCompatActivity {
 
-    private CaptureView mCaptureView;
+    private CenterCaptureView mCaptureView;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -17,6 +18,6 @@ public class CaptureViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_capture_view);
         mCaptureView = findViewById(R.id.view_cpature);
-        mCaptureView.initCaptureFrame();
+        //mCaptureView.initCaptureFrame();
     }
 }

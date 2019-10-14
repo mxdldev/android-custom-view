@@ -3,8 +3,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <com.mxdl.customview.view.SquareCaptureView
-
+    <com.mxdl.customview.view.CaptureView
         android:id="@+id/view_cpature"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

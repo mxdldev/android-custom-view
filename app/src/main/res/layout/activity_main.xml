@@ -36,10 +36,24 @@
             android:textAllCaps="false"
             />
         <Button
-            android:id="@+id/btn_capture_view"
+        android:id="@+id/btn_capture_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CaptureView"
+        android:textAllCaps="false"
+        />
+        <Button
+            android:id="@+id/btn_capture_view1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="CaptureView"
+            android:text="CaptureView1"
+            android:textAllCaps="false"
+            />
+        <Button
+            android:id="@+id/btn_cricle_capture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CricleCaptureView"
             android:textAllCaps="false"
             />
     </LinearLayout>

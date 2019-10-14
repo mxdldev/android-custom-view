@@ -7,10 +7,12 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Region;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -23,7 +25,8 @@ import com.mxdl.customview.R;
  * Version:     V1.0.0<br>
  * Update:     <br>
  */
-public class CenterCaptureView extends View {
+public class SquareCaptureView extends View {
+    public static final String TAG = SquareCaptureView.class.getSimpleName();
     private int mWidth;
     private Rect mScreenRect = new Rect();
     private Rect mCaptureRect = new Rect();
@@ -36,28 +39,29 @@ public class CenterCaptureView extends View {
     private int mLastY;
     private int mHitCorner;
 
-    public CenterCaptureView(Context context) {
+    public SquareCaptureView(Context context) {
         super(context);
         initView();
     }
 
-    public CenterCaptureView(Context context, AttributeSet attrs) {
+    public SquareCaptureView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView();
     }
 
-    public CenterCaptureView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SquareCaptureView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public CenterCaptureView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public SquareCaptureView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initView();
     }
 
     public void initView() {
+        setLayerType(1, null);
         mWidth = (int) (getResources().getDisplayMetrics().density * 216 + 0.5f);
         mBorderPaint.setStrokeWidth(getResources().getDisplayMetrics().density * 2);
         mBorderPaint.setStyle(Paint.Style.STROKE);
@@ -75,6 +79,7 @@ public class CenterCaptureView extends View {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
+        Log.v(TAG, "onLayout");
         mScreenRect.set(left, top, right, bottom);
         int captureLeft = (right - mWidth) / 2;
         int captureTop = (bottom - mWidth) / 2;
@@ -86,15 +91,20 @@ public class CenterCaptureView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
+        //Log.v(TAG,"onDraw left:"+mCaptureRect.left+";top:"+mCaptureRect.top+";right:"+mCaptureRect.right+";bottom:"+mCaptureRect.bottom);
+        canvas.save();
         mCapturePath.reset();
         mCapturePath.addRect(new RectF(mCaptureRect), Path.Direction.CW);
+        canvas.clipPath(mCapturePath, Region.Op.INTERSECT);
         //画矩形区域
-        canvas.drawRect(mCaptureRect, mAreaPaint);
+        canvas.drawRect(mScreenRect, mAreaPaint);
         //画矩形边框
         canvas.drawPath(mCapturePath, mBorderPaint);
+        canvas.restore();
 
         //画左上锚点
-        
+
         mAnchorDrawable.setBounds(mCaptureRect.left - mHalfAnchorWidth, mCaptureRect.top - mHalfAnchorWidth, mCaptureRect.left + mHalfAnchorWidth, mCaptureRect.top + mHalfAnchorWidth);
         mAnchorDrawable.draw(canvas);
 
@@ -116,12 +126,13 @@ public class CenterCaptureView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         int x = (int) event.getX();
         int y = (int) event.getY();
-        
-        switch (event.getAction()){
+
+        switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mHitCorner = getHitCorner(x, y);
+                //Log.v(TAG, "ACTION_DOWN:mHitCorner" + mHitCorner);
                 //如果没有点击在锚点上，则直接返回false
-                if(mHitCorner == 0){
+                if (mHitCorner == 0) {
                     return false;
                 }
                 break;
@@ -129,51 +140,102 @@ public class CenterCaptureView extends View {
                 mHitCorner = 0;
                 break;
             case MotionEvent.ACTION_MOVE:
-                if(mHitCorner == 0){
+                if (mHitCorner == 0) {
                     return false;
                 }
                 int dx = x - mLastX;
                 int dy = y - mLastY;
-                if(mHitCorner == 7){
+
+                //为了保证是正方形，以滑动距离远的为标准
+                if (mHitCorner == 7 || mHitCorner == 3) {
+                    if (Math.abs(dx) >= Math.abs(dy)) {
+                        dy = dx;
+                    } else {
+                        dx = dy;
+                    }
+                }
+                //为了保证是正方形，以滑动距离远的为标准
+                if (mHitCorner == 9 || mHitCorner == 1) {
+                    Log.v(TAG, "dx:" + dx + ";dy:" + dy);
+                    if (Math.abs(dx) >= Math.abs(dy)) {
+                        if (dy >= 0) {
+                            dy = Math.abs(dx);
+                        } else {
+                            dy = -Math.abs(dx);
+                        }
+                    } else {
+                        if (dx >= 0) {
+                            dx = Math.abs(dy);
+                        } else {
+                            dx = -Math.abs(dy);
+                        }
+                    }
+                    if (dx == dy) {
+                        dx = -dx;
+                    }
+                    Log.v(TAG, "dx1:" + dx + ";dy1:" + dy);
+                }
+                if (mHitCorner == 7) {
                     mCaptureRect.left += dx;
                     mCaptureRect.top += dy;
                     mCaptureRect.right -= dx;
                     mCaptureRect.bottom -= dy;
-                }else if(mHitCorner == 9){
-                   mCaptureRect.left -= dx;
+                } else if (mHitCorner == 9) {
+                    mCaptureRect.left -= dx;
                     mCaptureRect.top += dy;
                     mCaptureRect.right += dx;
                     mCaptureRect.bottom -= dy;
-                }else if(mHitCorner == 3){
+                } else if (mHitCorner == 3) {
+
                     mCaptureRect.left -= dx;
                     mCaptureRect.top -= dy;
                     mCaptureRect.right += dx;
                     mCaptureRect.bottom += dy;
-                }else if(mHitCorner == 1){
+                } else if (mHitCorner == 1) {
+
                     mCaptureRect.left += dx;
                     mCaptureRect.top -= dy;
                     mCaptureRect.right -= dx;
                     mCaptureRect.bottom += dy;
                 }
+
+                //防止选取越界
+                int screenWidth = mScreenRect.right - mScreenRect.left;
+                int screenHeight = mScreenRect.bottom - mScreenRect.top;
+                if (mCaptureRect.left <= mHalfAnchorWidth || mCaptureRect.left >= screenWidth - mHalfAnchorWidth) {
+                    mCaptureRect.left = mHalfAnchorWidth;
+                    int maxWidth = screenWidth - mHalfAnchorWidth * 2;
+                    mCaptureRect.right = mCaptureRect.left + maxWidth;
+                    mCaptureRect.top = (screenHeight - maxWidth) / 2;
+                    mCaptureRect.bottom = mCaptureRect.top + maxWidth;
+                }
+
+                boolean square = true;
+                if (Math.abs(mCaptureRect.right - mCaptureRect.left) != Math.abs(mCaptureRect.bottom - mCaptureRect.top)) {
+                    square = false;
+                }
+                Log.v(TAG, "mHitCorner" + mHitCorner + ";dx:" + dx + ";dy:" + dy + ";width:" + (mCaptureRect.right - mCaptureRect.left) + ";height:" + (mCaptureRect.bottom - mCaptureRect.top) + ";square:" + (square ? "ok" : "------------------"));
+
+
                 break;
-        }
-        mLastX = x;
+        } mLastX = x;
         mLastY = y;
         invalidate();
         return true;
     }
+
     public int getHitCorner(float x, float y) {
         int result = 0;
-        if (y > mCaptureRect.top - mHalfAnchorWidth && y < mCaptureRect.top + mHalfAnchorWidth) {
-            if (x > mCaptureRect.left - mHalfAnchorWidth && x < mCaptureRect.left + mHalfAnchorWidth) {
+        if (y > mCaptureRect.top - mHalfAnchorWidth * 2 && y < mCaptureRect.top + mHalfAnchorWidth * 2) {
+            if (x > mCaptureRect.left - mHalfAnchorWidth * 2 && x < mCaptureRect.left + mHalfAnchorWidth * 2) {
                 result = 7;
-            } else if (x > mCaptureRect.right - mHalfAnchorWidth && x < mCaptureRect.right + mHalfAnchorWidth) {
+            } else if (x > mCaptureRect.right - mHalfAnchorWidth * 2 && x < mCaptureRect.right + mHalfAnchorWidth * 2) {
                 result = 9;
             }
-        } else if (y > mCaptureRect.bottom - mHalfAnchorWidth && y < mCaptureRect.bottom + mHalfAnchorWidth) {
-            if (x > mCaptureRect.left - mHalfAnchorWidth && x < mCaptureRect.left + mHalfAnchorWidth) {
+        } else if (y > mCaptureRect.bottom - mHalfAnchorWidth * 2 && y < mCaptureRect.bottom + mHalfAnchorWidth * 2) {
+            if (x > mCaptureRect.left - mHalfAnchorWidth * 2 && x < mCaptureRect.left + mHalfAnchorWidth * 2) {
                 result = 1;
-            } else if (x > mCaptureRect.right - mHalfAnchorWidth && x < mCaptureRect.right + mHalfAnchorWidth) {
+            } else if (x > mCaptureRect.right - mHalfAnchorWidth * 2 && x < mCaptureRect.right + mHalfAnchorWidth * 2) {
                 result = 3;
             }
         }

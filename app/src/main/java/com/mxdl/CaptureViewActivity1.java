@@ -1,22 +1,22 @@
 package com.mxdl;
 
 import android.annotation.SuppressLint;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.mxdl.customview.R;
-import com.mxdl.customview.view.SquareCaptureView;
+import com.mxdl.customview.view.CaptureView;
 
-public class CaptureViewActivity extends AppCompatActivity {
+public class CaptureViewActivity1 extends AppCompatActivity {
 
-    private SquareCaptureView mCaptureView;
+    private CaptureView mCaptureView;
 
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_capture_view);
+        setContentView(R.layout.activity_capture_view1);
         mCaptureView = findViewById(R.id.view_cpature);
-        //mCaptureView.initCaptureFrame();
+        mCaptureView.initCaptureFrame();
     }
 }

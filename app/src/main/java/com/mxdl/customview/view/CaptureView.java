@@ -75,7 +75,7 @@ public class CaptureView extends View {
 
     public CaptureView(Context context, AttributeSet paramAttributeSet) {
         super(context, paramAttributeSet);
-        setLayerType(1, null);
+        //setLayerType(1, null);
         this.paint2.setStrokeWidth(5.0F);
         this.paint2.setStyle(Paint.Style.STROKE);
         this.paint2.setAntiAlias(true);
@@ -183,6 +183,7 @@ public class CaptureView extends View {
         paint1.setStyle(Paint.Style.FILL_AND_STROKE);
         paint1.setColor(Color.parseColor("#53B9F5"));
         paint1.setAlpha(40);
+
         canvas.drawRect(this.mWholeViewRect, this.paint1);
         Log.v("MYTAG", "onDraw left:" + mWholeViewRect.left + ";top:" + mWholeViewRect.top + ";right:" + mWholeViewRect.right + ";bottom:" + mWholeViewRect.bottom);
         canvas.drawPath(localPath, this.paint2);

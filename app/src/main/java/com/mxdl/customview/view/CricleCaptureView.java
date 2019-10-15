@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.Region;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -18,8 +17,6 @@ import android.view.View;
 
 import com.mxdl.customview.R;
 
-import java.util.Random;
-
 /**
  * Description: <CenterCaptureView><br>
  * Author:      mxdl<br>
@@ -29,8 +26,8 @@ import java.util.Random;
  */
 public class CricleCaptureView extends View {
     public static final String TAG = CricleCaptureView.class.getSimpleName();
-    private int mRadius;
-    private int mRadius1;
+    private int mRelativeRadius;
+    private int mAbsoluteRadius;
     private Rect mScreenRect = new Rect();
     private Rect mCaptureRect = new Rect();
     private Paint mBorderPaint = new Paint();
@@ -66,9 +63,9 @@ public class CricleCaptureView extends View {
     }
 
     public void initView() {
-        //setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        mRadius = (int) (getResources().getDisplayMetrics().density * 216 + 0.5f) / 2;
-        mRadius1 = mRadius;
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        mRelativeRadius = (int) (getResources().getDisplayMetrics().density * 216 + 0.5f) / 2;
+        mAbsoluteRadius = mRelativeRadius;
         mBorderPaint.setStrokeWidth(getResources().getDisplayMetrics().density * 2);
         mBorderPaint.setStyle(Paint.Style.STROKE);
         mBorderPaint.setAntiAlias(true);
@@ -87,10 +84,10 @@ public class CricleCaptureView extends View {
         super.onLayout(changed, left, top, right, bottom);
         Log.v(TAG, "onLayout");
         mScreenRect.set(left, top, right, bottom);
-        int captureLeft = (right - mRadius * 2) / 2;
-        int captureTop = (bottom - mRadius * 2) / 2;
-        int captureRight = captureLeft + mRadius * 2;
-        int captureBottom = captureTop + mRadius * 2;
+        int captureLeft = (right - mRelativeRadius * 2) / 2;
+        int captureTop = (bottom - mRelativeRadius * 2) / 2;
+        int captureRight = captureLeft + mRelativeRadius * 2;
+        int captureBottom = captureTop + mRelativeRadius * 2;
 
         mCricleX = (right - left) / 2;
         mCricleY = (bottom - top) / 2;
@@ -105,7 +102,7 @@ public class CricleCaptureView extends View {
         canvas.save();
         mCapturePath.reset();
         //添加圆形路径
-        mCapturePath.addCircle(mCricleX, mCricleY, mRadius1, Path.Direction.CW);
+        mCapturePath.addCircle(mCricleX, mCricleY, mAbsoluteRadius, Path.Direction.CW);
         //裁切一个圆形的画布区域
         canvas.clipPath(mCapturePath, Region.Op.INTERSECT);
         //画整个背景区域
@@ -115,19 +112,19 @@ public class CricleCaptureView extends View {
         canvas.restore();
 
         //画8号位锚点
-        mAnchorDrawable.setBounds(mCaptureRect.left + mRadius - mHalfAnchorWidth, mCaptureRect.top - mHalfAnchorWidth, mCaptureRect.left + mRadius + mHalfAnchorWidth, mCaptureRect.top + mHalfAnchorWidth);
+        mAnchorDrawable.setBounds(mCaptureRect.left + mRelativeRadius - mHalfAnchorWidth, mCaptureRect.top - mHalfAnchorWidth, mCaptureRect.left + mRelativeRadius + mHalfAnchorWidth, mCaptureRect.top + mHalfAnchorWidth);
         mAnchorDrawable.draw(canvas);
 
         //画6号位锚点
-        mAnchorDrawable.setBounds(mCaptureRect.right - mHalfAnchorWidth, mCaptureRect.top + mRadius - mHalfAnchorWidth, mCaptureRect.right + mHalfAnchorWidth, mCaptureRect.top + mRadius + mHalfAnchorWidth);
+        mAnchorDrawable.setBounds(mCaptureRect.right - mHalfAnchorWidth, mCaptureRect.top + mRelativeRadius - mHalfAnchorWidth, mCaptureRect.right + mHalfAnchorWidth, mCaptureRect.top + mRelativeRadius + mHalfAnchorWidth);
         mAnchorDrawable.draw(canvas);
 
         //画2号位锚点
-        mAnchorDrawable.setBounds(mCaptureRect.left + mRadius - mHalfAnchorWidth, mCaptureRect.bottom - mHalfAnchorWidth, mCaptureRect.left + mRadius + mHalfAnchorWidth, mCaptureRect.bottom + mHalfAnchorWidth);
+        mAnchorDrawable.setBounds(mCaptureRect.left + mRelativeRadius - mHalfAnchorWidth, mCaptureRect.bottom - mHalfAnchorWidth, mCaptureRect.left + mRelativeRadius + mHalfAnchorWidth, mCaptureRect.bottom + mHalfAnchorWidth);
         mAnchorDrawable.draw(canvas);
 
         //画4号位锚点
-        mAnchorDrawable.setBounds(mCaptureRect.left - mHalfAnchorWidth, mCaptureRect.top + mRadius - mHalfAnchorWidth, mCaptureRect.left + mHalfAnchorWidth, mCaptureRect.top + mRadius + mHalfAnchorWidth);
+        mAnchorDrawable.setBounds(mCaptureRect.left - mHalfAnchorWidth, mCaptureRect.top + mRelativeRadius - mHalfAnchorWidth, mCaptureRect.left + mHalfAnchorWidth, mCaptureRect.top + mRelativeRadius + mHalfAnchorWidth);
         mAnchorDrawable.draw(canvas);
 
     }
@@ -157,28 +154,28 @@ public class CricleCaptureView extends View {
                 int dy = y - mLastY;
 
                 if (mHitCorner == 4) {
-                    mRadius -= dx;
+                    mRelativeRadius -= dx;
                     mCaptureRect.left += dx;
                     mCaptureRect.top += dx;
                     mCaptureRect.right -= dx;
                     mCaptureRect.bottom -= dx;
                 }
                 if (mHitCorner == 8) {
-                    mRadius -= dy;
+                    mRelativeRadius -= dy;
                     mCaptureRect.left += dy;
                     mCaptureRect.top += dy;
                     mCaptureRect.right -= dy;
                     mCaptureRect.bottom -= dy;
                 }
                 if (mHitCorner == 6) {
-                    mRadius += dx;
+                    mRelativeRadius += dx;
                     mCaptureRect.left -= dx;
                     mCaptureRect.top -= dx;
                     mCaptureRect.right += dx;
                     mCaptureRect.bottom += dx;
                 }
                 if (mHitCorner == 2) {
-                    mRadius += dy;
+                    mRelativeRadius += dy;
                     mCaptureRect.left -= dy;
                     mCaptureRect.top -= dy;
                     mCaptureRect.right += dy;
@@ -190,14 +187,14 @@ public class CricleCaptureView extends View {
                 int screenHeight = mScreenRect.bottom - mScreenRect.top;
                 int maxWidth = screenWidth - mHalfAnchorWidth * 2;
                 int maxRaduis = maxWidth/2;
-                if (Math.abs(mRadius) > maxRaduis) {
-                    if (mRadius > 0) {
-                        mRadius = maxRaduis;
+                if (Math.abs(mRelativeRadius) > maxRaduis) {
+                    if (mRelativeRadius > 0) {
+                        mRelativeRadius = maxRaduis;
                     } else {
-                        mRadius = -maxRaduis;
+                        mRelativeRadius = -maxRaduis;
                     }
                 }
-                mRadius1 = Math.abs(mRadius);
+                mAbsoluteRadius = Math.abs(mRelativeRadius);
                 if (mCaptureRect.left <= mHalfAnchorWidth) {
                     mCaptureRect.left = mHalfAnchorWidth;
                     mCaptureRect.right = mCaptureRect.left + maxWidth;
@@ -214,7 +211,7 @@ public class CricleCaptureView extends View {
                 if (Math.abs(mCaptureRect.right - mCaptureRect.left) != Math.abs(mCaptureRect.bottom - mCaptureRect.top)) {
                     square = false;
                 }
-                Log.v(TAG, "mHitCorner" + mHitCorner + ";mRadius:" + mRadius + ";mRadius1:" + mRadius1 + ";dx:" + dx + ";dy:" + dy + ";width:" + (mCaptureRect.right - mCaptureRect.left) + ";height:" + (mCaptureRect.bottom - mCaptureRect.top) + ";square:" + (square ? "ok" : "------------------") + ";rect：" + mCaptureRect.toString());
+                Log.v(TAG, "mHitCorner" + mHitCorner + ";mRelativeRadius:" + mRelativeRadius + ";mAbsoluteRadius:" + mAbsoluteRadius + ";dx:" + dx + ";dy:" + dy + ";width:" + (mCaptureRect.right - mCaptureRect.left) + ";height:" + (mCaptureRect.bottom - mCaptureRect.top) + ";square:" + (square ? "ok" : "------------------") + ";rect：" + mCaptureRect.toString());
                 break;
         }
         mLastX = x;
@@ -225,13 +222,13 @@ public class CricleCaptureView extends View {
 
     public int getHitCorner(float x, float y) {
         int result = 0;
-        if (y > mCaptureRect.top + mRadius - mHalfAnchorWidth * 2 && y < mCaptureRect.top + mRadius + mHalfAnchorWidth * 2) {
+        if (y > mCaptureRect.top + mRelativeRadius - mHalfAnchorWidth * 2 && y < mCaptureRect.top + mRelativeRadius + mHalfAnchorWidth * 2) {
             if (x > mCaptureRect.left - mHalfAnchorWidth * 2 && x < mCaptureRect.left + mHalfAnchorWidth * 2) {
                 result = 4;
             } else if (x > mCaptureRect.right - mHalfAnchorWidth * 2 && x < mCaptureRect.right + mHalfAnchorWidth * 2) {
                 result = 6;
             }
-        } else if (x > mCaptureRect.left + mRadius - mHalfAnchorWidth * 2 && x < mCaptureRect.left + mRadius + mHalfAnchorWidth * 2) {
+        } else if (x > mCaptureRect.left + mRelativeRadius - mHalfAnchorWidth * 2 && x < mCaptureRect.left + mRelativeRadius + mHalfAnchorWidth * 2) {
             if (y > mCaptureRect.top - mHalfAnchorWidth * 2 && y < mCaptureRect.top + mHalfAnchorWidth * 2) {
                 result = 8;
             } else if (y > mCaptureRect.bottom - mHalfAnchorWidth * 2 && y < mCaptureRect.bottom + mHalfAnchorWidth * 2) {

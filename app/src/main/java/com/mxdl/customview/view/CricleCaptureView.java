@@ -18,6 +18,8 @@ import android.view.View;
 
 import com.mxdl.customview.R;
 
+import java.util.Random;
+
 /**
  * Description: <CenterCaptureView><br>
  * Author:      mxdl<br>
@@ -28,6 +30,7 @@ import com.mxdl.customview.R;
 public class CricleCaptureView extends View {
     public static final String TAG = CricleCaptureView.class.getSimpleName();
     private int mRadius;
+    private int mRadius1;
     private Rect mScreenRect = new Rect();
     private Rect mCaptureRect = new Rect();
     private Paint mBorderPaint = new Paint();
@@ -63,8 +66,9 @@ public class CricleCaptureView extends View {
     }
 
     public void initView() {
-        setLayerType(1, null);
+        //setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         mRadius = (int) (getResources().getDisplayMetrics().density * 216 + 0.5f) / 2;
+        mRadius1 = mRadius;
         mBorderPaint.setStrokeWidth(getResources().getDisplayMetrics().density * 2);
         mBorderPaint.setStyle(Paint.Style.STROKE);
         mBorderPaint.setAntiAlias(true);
@@ -100,11 +104,13 @@ public class CricleCaptureView extends View {
         //Log.v(TAG,"onDraw left:"+mCaptureRect.left+";top:"+mCaptureRect.top+";right:"+mCaptureRect.right+";bottom:"+mCaptureRect.bottom);
         canvas.save();
         mCapturePath.reset();
-        mCapturePath.addCircle(mCricleX, mCricleY, mRadius, Path.Direction.CW);
+        //添加圆形路径
+        mCapturePath.addCircle(mCricleX, mCricleY, mRadius1, Path.Direction.CW);
+        //裁切一个圆形的画布区域
         canvas.clipPath(mCapturePath, Region.Op.INTERSECT);
-        //画矩形区域
+        //画整个背景区域
         canvas.drawRect(mScreenRect, mAreaPaint);
-        //画矩形边框
+        //画背景区域的边框
         canvas.drawPath(mCapturePath, mBorderPaint);
         canvas.restore();
 
@@ -150,33 +156,66 @@ public class CricleCaptureView extends View {
                 int dx = x - mLastX;
                 int dy = y - mLastY;
 
-                //为了保证是正方形，以滑动距离远的为标准
-                if (mHitCorner == 2 || mHitCorner == 8) {
-                    if (Math.abs(dx) >= Math.abs(dy)) {
-                        dy = dx;
-                    } else {
-                        dx = dy;
-                    }
+                if (mHitCorner == 4) {
+                    mRadius -= dx;
+                    mCaptureRect.left += dx;
+                    mCaptureRect.top += dx;
+                    mCaptureRect.right -= dx;
+                    mCaptureRect.bottom -= dx;
                 }
-
-                if(mHitCorner == 2){
-                    if(dy > 0){
-                        mRadius += dy;
-                    }else{
-                        mRadius -= dy;
-                    }
+                if (mHitCorner == 8) {
+                    mRadius -= dy;
+                    mCaptureRect.left += dy;
+                    mCaptureRect.top += dy;
+                    mCaptureRect.right -= dy;
+                    mCaptureRect.bottom -= dy;
+                }
+                if (mHitCorner == 6) {
+                    mRadius += dx;
                     mCaptureRect.left -= dx;
-                    mCaptureRect.top -= dy;
+                    mCaptureRect.top -= dx;
                     mCaptureRect.right += dx;
+                    mCaptureRect.bottom += dx;
+                }
+                if (mHitCorner == 2) {
+                    mRadius += dy;
+                    mCaptureRect.left -= dy;
+                    mCaptureRect.top -= dy;
+                    mCaptureRect.right += dy;
                     mCaptureRect.bottom += dy;
                 }
+
+                //防止选取越界
+                int screenWidth = mScreenRect.right - mScreenRect.left;
+                int screenHeight = mScreenRect.bottom - mScreenRect.top;
+                int maxRaduis = (screenWidth - mHalfAnchorWidth * 2) / 2;
+                if (Math.abs(mRadius) > maxRaduis) {
+                    if (mRadius > 0) {
+                        mRadius = maxRaduis;
+                    } else {
+                        mRadius = -maxRaduis;
+                    }
+                }
+                mRadius1 = Math.abs(mRadius);
+                if (mCaptureRect.left <= mHalfAnchorWidth) {
+                    mCaptureRect.left = mHalfAnchorWidth;
+                    int maxWidth = screenWidth - mHalfAnchorWidth * 2;
+                    mCaptureRect.right = mCaptureRect.left + maxWidth;
+                    mCaptureRect.top = (screenHeight - maxWidth) / 2;
+                    mCaptureRect.bottom = mCaptureRect.top + maxWidth;
+                } else if (mCaptureRect.left >= screenWidth - mHalfAnchorWidth) {
+                    mCaptureRect.left = screenWidth - mHalfAnchorWidth;
+                    int maxWidth = screenWidth - mHalfAnchorWidth * 2;
+                    mCaptureRect.top = mCricleY + maxWidth/2;
+                    mCaptureRect.right = mHalfAnchorWidth;
+                    mCaptureRect.bottom = mCricleY - maxWidth/2;
+                }
+
                 boolean square = true;
                 if (Math.abs(mCaptureRect.right - mCaptureRect.left) != Math.abs(mCaptureRect.bottom - mCaptureRect.top)) {
                     square = false;
                 }
-                Log.v(TAG, "mHitCorner" + mHitCorner + ";dx:" + dx + ";dy:" + dy + ";width:" + (mCaptureRect.right - mCaptureRect.left) + ";height:" + (mCaptureRect.bottom - mCaptureRect.top) + ";square:" + (square ? "ok" : "------------------"));
-
-
+                Log.v(TAG, "mHitCorner" + mHitCorner + ";mRadius:" + mRadius + ";mRadius1:" + mRadius1 + ";dx:" + dx + ";dy:" + dy + ";width:" + (mCaptureRect.right - mCaptureRect.left) + ";height:" + (mCaptureRect.bottom - mCaptureRect.top) + ";square:" + (square ? "ok" : "------------------") + ";rect：" + mCaptureRect.toString());
                 break;
         }
         mLastX = x;

@@ -61,7 +61,7 @@ public class SquareCaptureView extends View {
     }
 
     public void initView() {
-        setLayerType(1, null);
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         mWidth = (int) (getResources().getDisplayMetrics().density * 216 + 0.5f);
         mBorderPaint.setStrokeWidth(getResources().getDisplayMetrics().density * 2);
         mBorderPaint.setStyle(Paint.Style.STROKE);
@@ -94,12 +94,15 @@ public class SquareCaptureView extends View {
 
         //Log.v(TAG,"onDraw left:"+mCaptureRect.left+";top:"+mCaptureRect.top+";right:"+mCaptureRect.right+";bottom:"+mCaptureRect.bottom);
         canvas.save();
+        //路径重新设置
         mCapturePath.reset();
+        //添加了一个当前的矩形区域
         mCapturePath.addRect(new RectF(mCaptureRect), Path.Direction.CW);
+        //当前的画布与指定的路径相交
         canvas.clipPath(mCapturePath, Region.Op.INTERSECT);
-        //画矩形区域
+        //画矩形背景选区
         canvas.drawRect(mScreenRect, mAreaPaint);
-        //画矩形边框
+        //画矩形背景边框
         canvas.drawPath(mCapturePath, mBorderPaint);
         canvas.restore();
 

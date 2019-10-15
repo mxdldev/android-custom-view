@@ -205,12 +205,17 @@ public class SquareCaptureView extends View {
                 //防止选取越界
                 int screenWidth = mScreenRect.right - mScreenRect.left;
                 int screenHeight = mScreenRect.bottom - mScreenRect.top;
-                if (mCaptureRect.left <= mHalfAnchorWidth || mCaptureRect.left >= screenWidth - mHalfAnchorWidth) {
+                int maxWidth = screenWidth - mHalfAnchorWidth * 2;
+                if (mCaptureRect.left <= mHalfAnchorWidth) {
                     mCaptureRect.left = mHalfAnchorWidth;
-                    int maxWidth = screenWidth - mHalfAnchorWidth * 2;
                     mCaptureRect.right = mCaptureRect.left + maxWidth;
                     mCaptureRect.top = (screenHeight - maxWidth) / 2;
                     mCaptureRect.bottom = mCaptureRect.top + maxWidth;
+                } else if (mCaptureRect.left >= screenWidth - mHalfAnchorWidth) {
+                    mCaptureRect.left = screenWidth - mHalfAnchorWidth;
+                    mCaptureRect.top = screenHeight / 2 + maxWidth / 2;
+                    mCaptureRect.right = mHalfAnchorWidth;
+                    mCaptureRect.bottom = screenHeight / 2 - maxWidth / 2;
                 }
 
                 boolean square = true;
@@ -221,8 +226,11 @@ public class SquareCaptureView extends View {
 
 
                 break;
-        } mLastX = x;
+        }
+
+        mLastX = x;
         mLastY = y;
+
         invalidate();
         return true;
     }

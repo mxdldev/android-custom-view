@@ -188,7 +188,8 @@ public class CricleCaptureView extends View {
                 //防止选取越界
                 int screenWidth = mScreenRect.right - mScreenRect.left;
                 int screenHeight = mScreenRect.bottom - mScreenRect.top;
-                int maxRaduis = (screenWidth - mHalfAnchorWidth * 2) / 2;
+                int maxWidth = screenWidth - mHalfAnchorWidth * 2;
+                int maxRaduis = maxWidth/2;
                 if (Math.abs(mRadius) > maxRaduis) {
                     if (mRadius > 0) {
                         mRadius = maxRaduis;
@@ -199,16 +200,14 @@ public class CricleCaptureView extends View {
                 mRadius1 = Math.abs(mRadius);
                 if (mCaptureRect.left <= mHalfAnchorWidth) {
                     mCaptureRect.left = mHalfAnchorWidth;
-                    int maxWidth = screenWidth - mHalfAnchorWidth * 2;
                     mCaptureRect.right = mCaptureRect.left + maxWidth;
                     mCaptureRect.top = (screenHeight - maxWidth) / 2;
                     mCaptureRect.bottom = mCaptureRect.top + maxWidth;
                 } else if (mCaptureRect.left >= screenWidth - mHalfAnchorWidth) {
                     mCaptureRect.left = screenWidth - mHalfAnchorWidth;
-                    int maxWidth = screenWidth - mHalfAnchorWidth * 2;
-                    mCaptureRect.top = mCricleY + maxWidth/2;
+                    mCaptureRect.top = screenHeight/2 + maxWidth/2;
                     mCaptureRect.right = mHalfAnchorWidth;
-                    mCaptureRect.bottom = mCricleY - maxWidth/2;
+                    mCaptureRect.bottom = screenHeight/2 - maxWidth/2;
                 }
 
                 boolean square = true;

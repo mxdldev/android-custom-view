@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.mxdl.customview">
+    package="com.mxdl.customview">
 
     <application
         android:name="com.mxdl.MyApplication"
@@ -10,25 +10,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CricleCaptureViewActivity">
-        </activity>
-        <activity android:name="com.mxdl.CaptureViewActivity1">
-        </activity>
-        <activity android:name="com.mxdl.CaptureViewActivity">
-        </activity>
-        <activity android:name=".HorizontalScrollViewActivity">
-        </activity>
-        <activity android:name=".PinnedHeaderActivity">
-        </activity>
+        <activity android:name=".RectCaptureViewActivity"></activity>
+        <activity android:name=".CricleCaptureViewActivity"></activity>
+        <activity android:name="com.mxdl.CaptureViewActivity1"></activity>
+        <activity android:name="com.mxdl.CaptureViewActivity"></activity>
+        <activity android:name=".HorizontalScrollViewActivity"></activity>
+        <activity android:name=".PinnedHeaderActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".StickyLayoutActivity"/>
-        <activity android:name=".HorizontalScrollViewExActivity"/>
+        <activity android:name=".StickyLayoutActivity" />
+        <activity android:name=".HorizontalScrollViewExActivity" />
     </application>
 
 </manifest>

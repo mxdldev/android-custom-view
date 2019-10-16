@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mBtnCaptrueView;
     private Button mBtnCaptrueView1;
     private Button mBtnCricleCapture;
+    private Button mBtnRectCapture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnCaptrueView1 = findViewById(R.id.btn_capture_view1);
         mBtnCricleCapture = findViewById(R.id.btn_cricle_capture);
 
+        mBtnRectCapture = findViewById(R.id.btn_rect_capture);
+
         mBtnStickyLayout.setOnClickListener(this);
         mBtnHorizontalScrollViewEx.setOnClickListener(this);
         mBtnHorizontalScrollView.setOnClickListener(this);
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnCaptrueView.setOnClickListener(this);
         mBtnCaptrueView1.setOnClickListener(this);
         mBtnCricleCapture.setOnClickListener(this);
+        mBtnRectCapture.setOnClickListener(this);
     }
 
     @Override
@@ -70,6 +74,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_cricle_capture:
                 startActivity(new Intent(this, CricleCaptureViewActivity.class));
+                break;
+            case R.id.btn_rect_capture:
+                startActivity(new Intent(this, RectCaptureViewActivity.class));
                 break;
         }
     }

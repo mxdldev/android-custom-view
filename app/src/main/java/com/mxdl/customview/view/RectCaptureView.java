@@ -133,8 +133,6 @@ public class RectCaptureView extends View {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mHitCorner = getHitCorner(x, y);
-                //Log.v(TAG, "ACTION_DOWN:mHitCorner" + mHitCorner);
-                //如果没有点击在锚点上，则直接返回false
                 if (mHitCorner == 0) {
                     return false;
                 }
@@ -152,24 +150,14 @@ public class RectCaptureView extends View {
                 if (mHitCorner == 7) {
                     mCaptureRect.left += dx;
                     mCaptureRect.top += dy;
-                    //mCaptureRect.right -= dx;
-                    //mCaptureRect.bottom -= dy;
                 } else if (mHitCorner == 9) {
                     mCaptureRect.left -= dx;
                     mCaptureRect.top += dy;
-                    //mCaptureRect.right += dx;
-                    //mCaptureRect.bottom -= dy;
                 } else if (mHitCorner == 3) {
-
-                    //mCaptureRect.left -= dx;
-                    //mCaptureRect.top -= dy;
                     mCaptureRect.right += dx;
                     mCaptureRect.bottom += dy;
                 } else if (mHitCorner == 1) {
-
                     mCaptureRect.left += dx;
-                    //mCaptureRect.top -= dy;
-                    //mCaptureRect.right -= dx;
                     mCaptureRect.bottom += dy;
                 }
 

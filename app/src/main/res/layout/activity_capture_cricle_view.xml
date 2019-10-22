@@ -2,7 +2,7 @@
 <RelativeLayout android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 xmlns:android="http://schemas.android.com/apk/res/android">
-    <com.mxdl.customview.view.CricleCaptureView
+    <com.mxdl.customview.view.CaptureCricleView
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </RelativeLayout>

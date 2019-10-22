@@ -1,67 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <Button
-            android:id="@+id/btn_horizontal_scroll_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="HorizontalScrollView"
-            android:textAllCaps="false"
-            />
+
         <Button
             android:id="@+id/btn_horizontal_scroll_view_ex"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="HorizontalScrollViewEx"
-            android:textAllCaps="false"
-            />
+            android:textAllCaps="false" />
+
         <Button
             android:id="@+id/btn_pinned_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="PinnedHeaderExpandableListView"
-            android:textAllCaps="false"
-            />
+            android:textAllCaps="false" />
+
         <Button
             android:id="@+id/btn_sticky_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="StickyLayout"
-            android:textAllCaps="false"
-            />
+            android:textAllCaps="false" />
+
         <Button
-        android:id="@+id/btn_capture_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="CaptureView"
-        android:textAllCaps="false"
-        />
-        <Button
-            android:id="@+id/btn_capture_view1"
+            android:id="@+id/btn_capture_rect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="CaptureView1"
-            android:textAllCaps="false"
-            />
+            android:text="CaptureRectView"
+            android:textAllCaps="false" />
+
         <Button
-            android:id="@+id/btn_cricle_capture"
+            android:id="@+id/btn_capture_square"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="CricleCaptureView"
-            android:textAllCaps="false"
-            />
+            android:text="CaptureSquareView"
+            android:textAllCaps="false" />
+
         <Button
-            android:id="@+id/btn_rect_capture"
+            android:id="@+id/btn_capture_cricle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RectCaptureView"
-            android:textAllCaps="false"
-            />
+            android:text="CaptureCricleView"
+            android:textAllCaps="false" />
+
+
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

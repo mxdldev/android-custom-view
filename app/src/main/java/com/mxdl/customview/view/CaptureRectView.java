@@ -19,14 +19,14 @@ import android.view.View;
 import com.mxdl.customview.R;
 
 /**
- * Description: <CenterCaptureView><br>
+ * Description: <RectCaptureView><br>
  * Author:      mxdl<br>
  * Date:        2019/10/12<br>
  * Version:     V1.0.0<br>
  * Update:     <br>
  */
-public class SquareCaptureView extends View {
-    public static final String TAG = SquareCaptureView.class.getSimpleName();
+public class CaptureRectView extends View {
+    public static final String TAG = CaptureRectView.class.getSimpleName();
     private int mWidth;
     private Rect mScreenRect = new Rect();
     private Rect mCaptureRect = new Rect();
@@ -39,23 +39,23 @@ public class SquareCaptureView extends View {
     private int mLastY;
     private int mHitCorner;
 
-    public SquareCaptureView(Context context) {
+    public CaptureRectView(Context context) {
         super(context);
         initView();
     }
 
-    public SquareCaptureView(Context context, AttributeSet attrs) {
+    public CaptureRectView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView();
     }
 
-    public SquareCaptureView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CaptureRectView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public SquareCaptureView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CaptureRectView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initView();
     }
@@ -133,8 +133,6 @@ public class SquareCaptureView extends View {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mHitCorner = getHitCorner(x, y);
-                //Log.v(TAG, "ACTION_DOWN:mHitCorner" + mHitCorner);
-                //如果没有点击在锚点上，则直接返回false
                 if (mHitCorner == 0) {
                     return false;
                 }
@@ -149,56 +147,17 @@ public class SquareCaptureView extends View {
                 int dx = x - mLastX;
                 int dy = y - mLastY;
 
-                //为了保证是正方形，以滑动距离远的为标准
-                if (mHitCorner == 7 || mHitCorner == 3) {
-                    if (Math.abs(dx) >= Math.abs(dy)) {
-                        dy = dx;
-                    } else {
-                        dx = dy;
-                    }
-                }
-                //为了保证是正方形，以滑动距离远的为标准
-                if (mHitCorner == 9 || mHitCorner == 1) {
-                    Log.v(TAG, "dx:" + dx + ";dy:" + dy);
-                    if (Math.abs(dx) >= Math.abs(dy)) {
-                        if (dy >= 0) {
-                            dy = Math.abs(dx);
-                        } else {
-                            dy = -Math.abs(dx);
-                        }
-                    } else {
-                        if (dx >= 0) {
-                            dx = Math.abs(dy);
-                        } else {
-                            dx = -Math.abs(dy);
-                        }
-                    }
-                    if (dx == dy) {
-                        dx = -dx;
-                    }
-                    Log.v(TAG, "dx1:" + dx + ";dy1:" + dy);
-                }
                 if (mHitCorner == 7) {
                     mCaptureRect.left += dx;
                     mCaptureRect.top += dy;
-                    mCaptureRect.right -= dx;
-                    mCaptureRect.bottom -= dy;
                 } else if (mHitCorner == 9) {
-                    mCaptureRect.left -= dx;
-                    mCaptureRect.top += dy;
                     mCaptureRect.right += dx;
-                    mCaptureRect.bottom -= dy;
+                    mCaptureRect.top += dy;
                 } else if (mHitCorner == 3) {
-
-                    mCaptureRect.left -= dx;
-                    mCaptureRect.top -= dy;
                     mCaptureRect.right += dx;
                     mCaptureRect.bottom += dy;
                 } else if (mHitCorner == 1) {
-
                     mCaptureRect.left += dx;
-                    mCaptureRect.top -= dy;
-                    mCaptureRect.right -= dx;
                     mCaptureRect.bottom += dy;
                 }
 
@@ -208,16 +167,28 @@ public class SquareCaptureView extends View {
                 int maxWidth = screenWidth - mHalfAnchorWidth * 2;
                 if (mCaptureRect.left <= mHalfAnchorWidth) {
                     mCaptureRect.left = mHalfAnchorWidth;
-                    mCaptureRect.right = mCaptureRect.left + maxWidth;
-                    mCaptureRect.top = (screenHeight - maxWidth) / 2;
-                    mCaptureRect.bottom = mCaptureRect.top + maxWidth;
-                } else if (mCaptureRect.left >= screenWidth - mHalfAnchorWidth) {
-                    mCaptureRect.left = screenWidth - mHalfAnchorWidth;
-                    mCaptureRect.top = screenHeight / 2 + maxWidth / 2;
-                    mCaptureRect.right = mHalfAnchorWidth;
-                    mCaptureRect.bottom = screenHeight / 2 - maxWidth / 2;
                 }
-
+                if (mCaptureRect.top <= mHalfAnchorWidth) {
+                    mCaptureRect.top = mHalfAnchorWidth;
+                }
+                if (mCaptureRect.right >= screenWidth - mHalfAnchorWidth) {
+                    mCaptureRect.right = screenWidth - mHalfAnchorWidth;
+                }
+                if (mCaptureRect.bottom >= screenHeight - mHalfAnchorWidth) {
+                    mCaptureRect.bottom = screenHeight - mHalfAnchorWidth;
+                }
+                if (mCaptureRect.left >= screenWidth - mHalfAnchorWidth) {
+                    mCaptureRect.left = screenWidth - mHalfAnchorWidth;
+                }
+                if (mCaptureRect.top >= screenHeight - mHalfAnchorWidth) {
+                    mCaptureRect.top = screenHeight - mHalfAnchorWidth;
+                }
+                if (mCaptureRect.right <= mHalfAnchorWidth) {
+                    mCaptureRect.right = mHalfAnchorWidth;
+                }
+                if (mCaptureRect.bottom <= mHalfAnchorWidth) {
+                    mCaptureRect.bottom = mHalfAnchorWidth;
+                }
                 boolean square = true;
                 if (Math.abs(mCaptureRect.right - mCaptureRect.left) != Math.abs(mCaptureRect.bottom - mCaptureRect.top)) {
                     square = false;

@@ -6,9 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.mxdl.CaptureViewActivity;
-import com.mxdl.CaptureViewActivity1;
-
 /**
  * Description: <MainActivity><br>
  * Author:      mxdl<br>
@@ -16,14 +13,12 @@ import com.mxdl.CaptureViewActivity1;
  * Version:     V1.0.0<br>
  * Update:     <br>
  */
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button mBtnStickyLayout;
     private Button mBtnHorizontalScrollViewEx;
-    private Button mBtnHorizontalScrollView;
     private Button mBtnPinnedHeader;
     private Button mBtnCaptrueView;
-    private Button mBtnCaptrueView1;
     private Button mBtnCricleCapture;
     private Button mBtnRectCapture;
 
@@ -33,51 +28,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         mBtnStickyLayout = findViewById(R.id.btn_sticky_layout);
         mBtnHorizontalScrollViewEx = findViewById(R.id.btn_horizontal_scroll_view_ex);
-        mBtnHorizontalScrollView = findViewById(R.id.btn_horizontal_scroll_view);
         mBtnPinnedHeader = findViewById(R.id.btn_pinned_header);
-        mBtnCaptrueView = findViewById(R.id.btn_capture_view);
-        mBtnCaptrueView1 = findViewById(R.id.btn_capture_view1);
-        mBtnCricleCapture = findViewById(R.id.btn_cricle_capture);
-
-        mBtnRectCapture = findViewById(R.id.btn_rect_capture);
+        mBtnCaptrueView = findViewById(R.id.btn_capture_square);
+        mBtnCricleCapture = findViewById(R.id.btn_capture_cricle);
+        mBtnRectCapture = findViewById(R.id.btn_capture_rect);
 
         mBtnStickyLayout.setOnClickListener(this);
         mBtnHorizontalScrollViewEx.setOnClickListener(this);
-        mBtnHorizontalScrollView.setOnClickListener(this);
         mBtnPinnedHeader.setOnClickListener(this);
         mBtnCaptrueView.setOnClickListener(this);
-        mBtnCaptrueView1.setOnClickListener(this);
         mBtnCricleCapture.setOnClickListener(this);
         mBtnRectCapture.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btn_sticky_layout:
-                startActivity(new Intent(this, StickyLayoutActivity.class));
-                break;
+        switch (v.getId()) {
             case R.id.btn_horizontal_scroll_view_ex:
                 startActivity(new Intent(this, HorizontalScrollViewExActivity.class));
                 break;
-            case R.id.btn_horizontal_scroll_view:
-                startActivity(new Intent(this, HorizontalScrollViewActivity.class));
+            case R.id.btn_sticky_layout:
+                startActivity(new Intent(this, StickyLayoutActivity.class));
                 break;
             case R.id.btn_pinned_header:
-                startActivity(new Intent(this,PinnedHeaderActivity.class));
+                startActivity(new Intent(this, PinnedHeaderActivity.class));
                 break;
-            case R.id.btn_capture_view:
-                startActivity(new Intent(this, CaptureViewActivity.class));
+            case R.id.btn_capture_rect:
+                startActivity(new Intent(this, CaptureRectViewActivity.class));
                 break;
-            case R.id.btn_capture_view1:
-                startActivity(new Intent(this, CaptureViewActivity1.class));
+            case R.id.btn_capture_square:
+                startActivity(new Intent(this, CaptureSquareViewActivity.class));
                 break;
-            case R.id.btn_cricle_capture:
-                startActivity(new Intent(this, CricleCaptureViewActivity.class));
+            case R.id.btn_capture_cricle:
+                startActivity(new Intent(this, CaptureCricleViewActivity.class));
                 break;
-            case R.id.btn_rect_capture:
-                startActivity(new Intent(this, RectCaptureViewActivity.class));
-                break;
+
         }
     }
 }

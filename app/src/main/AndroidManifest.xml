@@ -10,16 +10,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RectCaptureViewActivity"></activity>
-        <activity android:name=".CricleCaptureViewActivity"></activity>
-        <activity android:name="com.mxdl.CaptureViewActivity1"></activity>
-        <activity android:name="com.mxdl.CaptureViewActivity"></activity>
-        <activity android:name=".HorizontalScrollViewActivity"></activity>
+        <activity android:name=".CaptureRectViewActivity"></activity>
+        <activity android:name=".CaptureCricleViewActivity"></activity>
+        <activity android:name=".CaptureSquareViewActivity"></activity>
         <activity android:name=".PinnedHeaderActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

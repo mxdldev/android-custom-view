@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.Region;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -24,10 +25,9 @@ import com.mxdl.customview.R;
  * Version:     V1.0.0<br>
  * Update:     <br>
  */
-public class CricleCaptureView extends View {
-    public static final String TAG = CricleCaptureView.class.getSimpleName();
-    private int mRelativeRadius;
-    private int mAbsoluteRadius;
+public class CaptureSquareView extends View {
+    public static final String TAG = CaptureSquareView.class.getSimpleName();
+    private int mWidth;
     private Rect mScreenRect = new Rect();
     private Rect mCaptureRect = new Rect();
     private Paint mBorderPaint = new Paint();
@@ -38,34 +38,31 @@ public class CricleCaptureView extends View {
     private int mLastX;
     private int mLastY;
     private int mHitCorner;
-    private int mCricleX;
-    private int mCricleY;
 
-    public CricleCaptureView(Context context) {
+    public CaptureSquareView(Context context) {
         super(context);
         initView();
     }
 
-    public CricleCaptureView(Context context, AttributeSet attrs) {
+    public CaptureSquareView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView();
     }
 
-    public CricleCaptureView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CaptureSquareView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public CricleCaptureView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CaptureSquareView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initView();
     }
 
     public void initView() {
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        mRelativeRadius = (int) (getResources().getDisplayMetrics().density * 216 + 0.5f) / 2;
-        mAbsoluteRadius = mRelativeRadius;
+        mWidth = (int) (getResources().getDisplayMetrics().density * 216 + 0.5f);
         mBorderPaint.setStrokeWidth(getResources().getDisplayMetrics().density * 2);
         mBorderPaint.setStyle(Paint.Style.STROKE);
         mBorderPaint.setAntiAlias(true);
@@ -84,13 +81,10 @@ public class CricleCaptureView extends View {
         super.onLayout(changed, left, top, right, bottom);
         Log.v(TAG, "onLayout");
         mScreenRect.set(left, top, right, bottom);
-        int captureLeft = (right - mRelativeRadius * 2) / 2;
-        int captureTop = (bottom - mRelativeRadius * 2) / 2;
-        int captureRight = captureLeft + mRelativeRadius * 2;
-        int captureBottom = captureTop + mRelativeRadius * 2;
-
-        mCricleX = (right - left) / 2;
-        mCricleY = (bottom - top) / 2;
+        int captureLeft = (right - mWidth) / 2;
+        int captureTop = (bottom - mWidth) / 2;
+        int captureRight = captureLeft + mWidth;
+        int captureBottom = captureTop + mWidth;
         mCaptureRect.set(captureLeft, captureTop, captureRight, captureBottom);
     }
 
@@ -100,31 +94,33 @@ public class CricleCaptureView extends View {
 
         //Log.v(TAG,"onDraw left:"+mCaptureRect.left+";top:"+mCaptureRect.top+";right:"+mCaptureRect.right+";bottom:"+mCaptureRect.bottom);
         canvas.save();
+        //路径重新设置
         mCapturePath.reset();
-        //添加圆形路径
-        mCapturePath.addCircle(mCricleX, mCricleY, mAbsoluteRadius, Path.Direction.CW);
-        //裁切一个圆形的画布区域
+        //添加了一个当前的矩形区域
+        mCapturePath.addRect(new RectF(mCaptureRect), Path.Direction.CW);
+        //当前的画布与指定的路径相交
         canvas.clipPath(mCapturePath, Region.Op.INTERSECT);
-        //画整个背景区域
+        //画矩形背景选区
         canvas.drawRect(mScreenRect, mAreaPaint);
-        //画背景区域的边框
+        //画矩形背景边框
         canvas.drawPath(mCapturePath, mBorderPaint);
         canvas.restore();
 
-        //画8号位锚点
-        mAnchorDrawable.setBounds(mCaptureRect.left + mRelativeRadius - mHalfAnchorWidth, mCaptureRect.top - mHalfAnchorWidth, mCaptureRect.left + mRelativeRadius + mHalfAnchorWidth, mCaptureRect.top + mHalfAnchorWidth);
+        //画左上锚点
+
+        mAnchorDrawable.setBounds(mCaptureRect.left - mHalfAnchorWidth, mCaptureRect.top - mHalfAnchorWidth, mCaptureRect.left + mHalfAnchorWidth, mCaptureRect.top + mHalfAnchorWidth);
         mAnchorDrawable.draw(canvas);
 
-        //画6号位锚点
-        mAnchorDrawable.setBounds(mCaptureRect.right - mHalfAnchorWidth, mCaptureRect.top + mRelativeRadius - mHalfAnchorWidth, mCaptureRect.right + mHalfAnchorWidth, mCaptureRect.top + mRelativeRadius + mHalfAnchorWidth);
+        //画右上锚点
+        mAnchorDrawable.setBounds(mCaptureRect.right - mHalfAnchorWidth, mCaptureRect.top - mHalfAnchorWidth, mCaptureRect.right + mHalfAnchorWidth, mCaptureRect.top + mHalfAnchorWidth);
         mAnchorDrawable.draw(canvas);
 
-        //画2号位锚点
-        mAnchorDrawable.setBounds(mCaptureRect.left + mRelativeRadius - mHalfAnchorWidth, mCaptureRect.bottom - mHalfAnchorWidth, mCaptureRect.left + mRelativeRadius + mHalfAnchorWidth, mCaptureRect.bottom + mHalfAnchorWidth);
+        //画右下锚点
+        mAnchorDrawable.setBounds(mCaptureRect.right - mHalfAnchorWidth, mCaptureRect.bottom - mHalfAnchorWidth, mCaptureRect.right + mHalfAnchorWidth, mCaptureRect.bottom + mHalfAnchorWidth);
         mAnchorDrawable.draw(canvas);
 
-        //画4号位锚点
-        mAnchorDrawable.setBounds(mCaptureRect.left - mHalfAnchorWidth, mCaptureRect.top + mRelativeRadius - mHalfAnchorWidth, mCaptureRect.left + mHalfAnchorWidth, mCaptureRect.top + mRelativeRadius + mHalfAnchorWidth);
+        //画左下锚点
+        mAnchorDrawable.setBounds(mCaptureRect.left - mHalfAnchorWidth, mCaptureRect.bottom - mHalfAnchorWidth, mCaptureRect.left + mHalfAnchorWidth, mCaptureRect.bottom + mHalfAnchorWidth);
         mAnchorDrawable.draw(canvas);
 
     }
@@ -153,32 +149,56 @@ public class CricleCaptureView extends View {
                 int dx = x - mLastX;
                 int dy = y - mLastY;
 
-                if (mHitCorner == 4) {
-                    mRelativeRadius -= dx;
+                //为了保证是正方形，以滑动距离远的为标准
+                if (mHitCorner == 7 || mHitCorner == 3) {
+                    if (Math.abs(dx) >= Math.abs(dy)) {
+                        dy = dx;
+                    } else {
+                        dx = dy;
+                    }
+                }
+                //为了保证是正方形，以滑动距离远的为标准
+                if (mHitCorner == 9 || mHitCorner == 1) {
+                    Log.v(TAG, "dx:" + dx + ";dy:" + dy);
+                    if (Math.abs(dx) >= Math.abs(dy)) {
+                        if (dy >= 0) {
+                            dy = Math.abs(dx);
+                        } else {
+                            dy = -Math.abs(dx);
+                        }
+                    } else {
+                        if (dx >= 0) {
+                            dx = Math.abs(dy);
+                        } else {
+                            dx = -Math.abs(dy);
+                        }
+                    }
+                    if (dx == dy) {
+                        dx = -dx;
+                    }
+                    Log.v(TAG, "dx1:" + dx + ";dy1:" + dy);
+                }
+                if (mHitCorner == 7) {
                     mCaptureRect.left += dx;
-                    mCaptureRect.top += dx;
-                    mCaptureRect.right -= dx;
-                    mCaptureRect.bottom -= dx;
-                }
-                if (mHitCorner == 8) {
-                    mRelativeRadius -= dy;
-                    mCaptureRect.left += dy;
                     mCaptureRect.top += dy;
-                    mCaptureRect.right -= dy;
+                    mCaptureRect.right -= dx;
                     mCaptureRect.bottom -= dy;
-                }
-                if (mHitCorner == 6) {
-                    mRelativeRadius += dx;
+                } else if (mHitCorner == 9) {
                     mCaptureRect.left -= dx;
-                    mCaptureRect.top -= dx;
+                    mCaptureRect.top += dy;
                     mCaptureRect.right += dx;
-                    mCaptureRect.bottom += dx;
-                }
-                if (mHitCorner == 2) {
-                    mRelativeRadius += dy;
-                    mCaptureRect.left -= dy;
+                    mCaptureRect.bottom -= dy;
+                } else if (mHitCorner == 3) {
+
+                    mCaptureRect.left -= dx;
                     mCaptureRect.top -= dy;
-                    mCaptureRect.right += dy;
+                    mCaptureRect.right += dx;
+                    mCaptureRect.bottom += dy;
+                } else if (mHitCorner == 1) {
+
+                    mCaptureRect.left += dx;
+                    mCaptureRect.top -= dy;
+                    mCaptureRect.right -= dx;
                     mCaptureRect.bottom += dy;
                 }
 
@@ -186,15 +206,6 @@ public class CricleCaptureView extends View {
                 int screenWidth = mScreenRect.right - mScreenRect.left;
                 int screenHeight = mScreenRect.bottom - mScreenRect.top;
                 int maxWidth = screenWidth - mHalfAnchorWidth * 2;
-                int maxRaduis = maxWidth/2;
-                if (Math.abs(mRelativeRadius) > maxRaduis) {
-                    if (mRelativeRadius > 0) {
-                        mRelativeRadius = maxRaduis;
-                    } else {
-                        mRelativeRadius = -maxRaduis;
-                    }
-                }
-                mAbsoluteRadius = Math.abs(mRelativeRadius);
                 if (mCaptureRect.left <= mHalfAnchorWidth) {
                     mCaptureRect.left = mHalfAnchorWidth;
                     mCaptureRect.right = mCaptureRect.left + maxWidth;
@@ -202,37 +213,41 @@ public class CricleCaptureView extends View {
                     mCaptureRect.bottom = mCaptureRect.top + maxWidth;
                 } else if (mCaptureRect.left >= screenWidth - mHalfAnchorWidth) {
                     mCaptureRect.left = screenWidth - mHalfAnchorWidth;
-                    mCaptureRect.top = screenHeight/2 + maxWidth/2;
+                    mCaptureRect.top = screenHeight / 2 + maxWidth / 2;
                     mCaptureRect.right = mHalfAnchorWidth;
-                    mCaptureRect.bottom = screenHeight/2 - maxWidth/2;
+                    mCaptureRect.bottom = screenHeight / 2 - maxWidth / 2;
                 }
 
                 boolean square = true;
                 if (Math.abs(mCaptureRect.right - mCaptureRect.left) != Math.abs(mCaptureRect.bottom - mCaptureRect.top)) {
                     square = false;
                 }
-                Log.v(TAG, "mHitCorner" + mHitCorner + ";mRelativeRadius:" + mRelativeRadius + ";mAbsoluteRadius:" + mAbsoluteRadius + ";dx:" + dx + ";dy:" + dy + ";width:" + (mCaptureRect.right - mCaptureRect.left) + ";height:" + (mCaptureRect.bottom - mCaptureRect.top) + ";square:" + (square ? "ok" : "------------------") + ";rect：" + mCaptureRect.toString());
+                Log.v(TAG, "mHitCorner" + mHitCorner + ";dx:" + dx + ";dy:" + dy + ";width:" + (mCaptureRect.right - mCaptureRect.left) + ";height:" + (mCaptureRect.bottom - mCaptureRect.top) + ";square:" + (square ? "ok" : "------------------"));
+
+
                 break;
         }
+
         mLastX = x;
         mLastY = y;
+
         invalidate();
         return true;
     }
 
     public int getHitCorner(float x, float y) {
         int result = 0;
-        if (y > mCaptureRect.top + mRelativeRadius - mHalfAnchorWidth * 2 && y < mCaptureRect.top + mRelativeRadius + mHalfAnchorWidth * 2) {
+        if (y > mCaptureRect.top - mHalfAnchorWidth * 2 && y < mCaptureRect.top + mHalfAnchorWidth * 2) {
             if (x > mCaptureRect.left - mHalfAnchorWidth * 2 && x < mCaptureRect.left + mHalfAnchorWidth * 2) {
-                result = 4;
+                result = 7;
             } else if (x > mCaptureRect.right - mHalfAnchorWidth * 2 && x < mCaptureRect.right + mHalfAnchorWidth * 2) {
-                result = 6;
+                result = 9;
             }
-        } else if (x > mCaptureRect.left + mRelativeRadius - mHalfAnchorWidth * 2 && x < mCaptureRect.left + mRelativeRadius + mHalfAnchorWidth * 2) {
-            if (y > mCaptureRect.top - mHalfAnchorWidth * 2 && y < mCaptureRect.top + mHalfAnchorWidth * 2) {
-                result = 8;
-            } else if (y > mCaptureRect.bottom - mHalfAnchorWidth * 2 && y < mCaptureRect.bottom + mHalfAnchorWidth * 2) {
-                result = 2;
+        } else if (y > mCaptureRect.bottom - mHalfAnchorWidth * 2 && y < mCaptureRect.bottom + mHalfAnchorWidth * 2) {
+            if (x > mCaptureRect.left - mHalfAnchorWidth * 2 && x < mCaptureRect.left + mHalfAnchorWidth * 2) {
+                result = 1;
+            } else if (x > mCaptureRect.right - mHalfAnchorWidth * 2 && x < mCaptureRect.right + mHalfAnchorWidth * 2) {
+                result = 3;
             }
         }
         return result;

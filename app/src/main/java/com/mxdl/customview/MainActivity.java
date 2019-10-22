@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.mxdl.customview.test.ScrollTestActivity;
+
 /**
  * Description: <MainActivity><br>
  * Author:      mxdl<br>
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mBtnCaptrueView;
     private Button mBtnCricleCapture;
     private Button mBtnRectCapture;
+    private Button mBtnScrollTo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnCaptrueView = findViewById(R.id.btn_capture_square);
         mBtnCricleCapture = findViewById(R.id.btn_capture_cricle);
         mBtnRectCapture = findViewById(R.id.btn_capture_rect);
+        mBtnScrollTo = findViewById(R.id.btn_scroll_to);
 
         mBtnStickyLayout.setOnClickListener(this);
         mBtnHorizontalScrollViewEx.setOnClickListener(this);
@@ -39,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnCaptrueView.setOnClickListener(this);
         mBtnCricleCapture.setOnClickListener(this);
         mBtnRectCapture.setOnClickListener(this);
+        mBtnScrollTo.setOnClickListener(this);
     }
 
     @Override
@@ -61,6 +66,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_capture_cricle:
                 startActivity(new Intent(this, CaptureCricleViewActivity.class));
+                break;
+            case R.id.btn_scroll_to:
+                startActivity(new Intent(this, ScrollTestActivity.class));
                 break;
 
         }

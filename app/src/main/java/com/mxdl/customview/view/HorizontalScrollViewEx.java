@@ -189,6 +189,7 @@ public class HorizontalScrollViewEx extends ViewGroup {
     @Override
     public void computeScroll() {
         if (mScroller.computeScrollOffset()) {
+            Log.v(TAG,"computeScroll x:"+mScroller.getCurrX()+";y:"+mScroller.getCurrY()+"|x:"+getX()+";y:"+getY()+"|"+";left:"+getLeft()+";top"+getTop()+";right:"+getRight()+";bottom:"+getBottom()+"|transtionX:"+getTranslationX()+";transtionY:"+getTranslationY());
             scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
             postInvalidate();
         }

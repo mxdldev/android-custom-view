@@ -49,7 +49,12 @@
             android:layout_height="wrap_content"
             android:text="CaptureCricleView"
             android:textAllCaps="false" />
-
-
+        <Button
+            android:id="@+id/btn_scroll_to"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ScrollTo"
+            android:textAllCaps="false"
+            />
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

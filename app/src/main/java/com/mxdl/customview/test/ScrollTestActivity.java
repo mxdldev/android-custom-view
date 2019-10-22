@@ -25,7 +25,8 @@ public class ScrollTestActivity extends AppCompatActivity {
             public void onClick(View v) {
                 float density = getResources().getDisplayMetrics().density;
                 //mTxtContent.scrollTo(-(int)(density * 150+0.5f),-(int)(density * 150+0.5f));
-                mTxtContent.smoothScrollTo(-(int)(density * 150+0.5f),-(int)(density * 150+0.5f));
+                mTxtContent.scrollBy(-(int)(density * 150+0.5f),-(int)(density * 150+0.5f));
+                //mTxtContent.smoothScrollTo(-(int)(density * 150+0.5f),-(int)(density * 150+0.5f));
             }
         });
     }

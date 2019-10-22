@@ -47,11 +47,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_horizontal_scroll_view_ex:
                 startActivity(new Intent(this, HorizontalScrollViewExActivity.class));
                 break;
-            case R.id.btn_sticky_layout:
-                startActivity(new Intent(this, StickyLayoutActivity.class));
-                break;
             case R.id.btn_pinned_header:
                 startActivity(new Intent(this, PinnedHeaderActivity.class));
+                break;
+            case R.id.btn_sticky_layout:
+                startActivity(new Intent(this, StickyLayoutActivity.class));
                 break;
             case R.id.btn_capture_rect:
                 startActivity(new Intent(this, CaptureRectViewActivity.class));

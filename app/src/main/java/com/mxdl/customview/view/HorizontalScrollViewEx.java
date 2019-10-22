@@ -35,9 +35,10 @@ import android.widget.Scroller;
  *     4.对速度检测器没有添加事件，知道获取的速度一直是0
  *     5.computeScroll()方法里面没有postinvlate
  *     6.对于正在滑动中再次进行滑动没有做优化
+ *     7.Math.abs(dx) >= Math.abs(dy) 加上等于会导致0,0的情况也被拦截，上滑，下滑会翻页
  */
 public class HorizontalScrollViewEx extends ViewGroup {
-
+    public static final String TAG = HorizontalScrollViewEx.class.getSimpleName();
     private Scroller mScroller;
     private VelocityTracker mVelocityTracker;
     private int mLastX;
@@ -127,11 +128,12 @@ public class HorizontalScrollViewEx extends ViewGroup {
             case MotionEvent.ACTION_MOVE:
                 int dx = x - mLastInterceptX;
                 int dy = y - mLastInterceptY;
-                if (Math.abs(dx) >= Math.abs(dy)) {
+                if (Math.abs(dx) > Math.abs(dy)) {
                     intercept = true;
                 } else {
                     intercept = false;
                 }
+                Log.v(TAG,"dx:"+dx+";dy:"+dy+"intercept:"+intercept);
                 break;
             case MotionEvent.ACTION_UP:
                 intercept = false;

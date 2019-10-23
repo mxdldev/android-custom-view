@@ -2,20 +2,28 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <com.mxdl.customview.test.view.TestTextView
-        android:id="@+id/txt_scroll"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <TextView
+        android:id="@+id/txt_scroll_to"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:text="hello world"
-        android:layout_marginTop="100dp"
+        android:layout_height="match_parent"
+        android:text="Hello world"
+        android:gravity="center"
         />
     <Button
-        android:id="@+id/btn_scroll"
+        android:id="@+id/btn_scroll_smooth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ScrollTo"
-        android:textAllCaps="false"
         android:layout_alignParentBottom="true"
+        android:text="开始滚动"
+        android:textAllCaps="false"
+        />
+    <Button
+        android:id="@+id/btn_show_position"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="查看位置"
+        android:textAllCaps="false"
+        android:layout_above="@+id/btn_scroll_smooth"
         />
 </RelativeLayout>

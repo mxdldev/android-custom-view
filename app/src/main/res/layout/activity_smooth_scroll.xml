@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.mxdl.customview.test.view.TestTextView
+        android:id="@+id/txt_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:text="hello world"
+        android:layout_marginTop="100dp"
+        />
+    <Button
+        android:id="@+id/btn_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ScrollTo"
+        android:textAllCaps="false"
+        android:layout_alignParentBottom="true"
+        />
+</RelativeLayout>

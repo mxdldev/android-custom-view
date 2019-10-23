@@ -10,7 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".test.ScrollTestActivity"></activity>
+        <activity android:name=".test.ViewPagerTestActivity"></activity>
+        <activity android:name=".test.MainTestActivity" />
+        <activity android:name=".test.ScrollTestActivity" />
+        <activity android:name=".test.SmoothScrollTestActivity" />
         <activity android:name=".CaptureRectViewActivity" />
         <activity android:name=".CaptureCricleViewActivity" />
         <activity android:name=".CaptureSquareViewActivity" />

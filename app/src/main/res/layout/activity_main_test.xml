@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <Button
+        android:id="@+id/btn_scroll_to"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SmoothTo"
+        android:textAllCaps="false"
+        />
+    <Button
+        android:id="@+id/btn_scroll_smooth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SmoothScroll"
+        android:textAllCaps="false"
+        />
+    <Button
+        android:id="@+id/btn_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ViewPagerTest"
+        android:textAllCaps="false"
+        />
+
+</LinearLayout>

@@ -132,6 +132,7 @@ public class HorizontalScrollViewEx extends ViewGroup {
                     intercept = true;
                 } else {
                     intercept = false;
+                    
                 }
                 Log.v(TAG,"dx:"+dx+";dy:"+dy+"intercept:"+intercept);
                 break;

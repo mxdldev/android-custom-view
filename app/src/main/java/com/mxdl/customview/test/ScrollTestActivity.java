@@ -2,31 +2,38 @@ package com.mxdl.customview.test;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.mxdl.customview.R;
-import com.mxdl.customview.test.view.TestTextView;
 
 public class ScrollTestActivity extends AppCompatActivity {
-
+    public static final String TAG = ScrollTestActivity.class.getSimpleName();
+    private TextView mTxtScroll;
     private Button mBtnScroll;
-    private TestTextView mTxtContent;
+    private Button mBtnShowPositon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scroll_test);
-        mBtnScroll = findViewById(R.id.btn_scroll);
-        mTxtContent = findViewById(R.id.txt_scroll);
+        mTxtScroll = findViewById(R.id.txt_scroll_to);
+        mBtnScroll = findViewById(R.id.btn_scroll_smooth);
+        mBtnShowPositon = findViewById(R.id.btn_show_position);
         mBtnScroll.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                float density = getResources().getDisplayMetrics().density;
-                //mTxtContent.scrollTo(-(int)(density * 150+0.5f),-(int)(density * 150+0.5f));
-                mTxtContent.scrollBy(-(int)(density * 150+0.5f),-(int)(density * 150+0.5f));
-                //mTxtContent.smoothScrollTo(-(int)(density * 150+0.5f),-(int)(density * 150+0.5f));
+                mTxtScroll.scrollBy(-200,-200);
+            }
+        });
+
+        mBtnShowPositon.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Log.v(TAG,"scrollX:"+mTxtScroll.getScrollX()+";scrollY:"+mTxtScroll.getScrollY()+"|x:"+mTxtScroll.getX()+";y:"+mTxtScroll.getY()+"|"+";left:"+mTxtScroll.getLeft()+";top:"+mTxtScroll.getTop()+";right:"+mTxtScroll.getRight()+";bottom:"+mTxtScroll.getBottom()+"|transtionX:"+mTxtScroll.getTranslationX()+";transtionY:"+mTxtScroll.getTranslationY());
             }
         });
     }

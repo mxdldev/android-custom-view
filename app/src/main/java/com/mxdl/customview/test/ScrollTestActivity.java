@@ -25,7 +25,7 @@ public class ScrollTestActivity extends AppCompatActivity {
         mBtnScroll.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                mTxtScroll.scrollBy(-200,-200);
+                mTxtScroll.scrollBy(200,200);
             }
         });
 

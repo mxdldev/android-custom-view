@@ -12,7 +12,7 @@ import com.mxdl.customview.test.view.MyViewPager;
 public class ViewPagerTestActivity extends AppCompatActivity {
 
     private MyViewPager mViewPager;
-    int[] colors = {Color.BLACK,Color.GREEN,Color.BLUE};
+    int[] colors = {Color.GREEN,Color.RED,Color.BLUE};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

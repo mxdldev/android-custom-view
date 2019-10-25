@@ -77,7 +77,7 @@ public class PinnedHeaderExpandableListView extends ExpandableListView {
                 if(nextGroup == firstGroup + 1){
                     if(top <= mPinnedHeaderHeight){
                         int delta = mPinnedHeaderHeight - top;
-                        mPinnedHeader.layout(0,-delta,mPinnedHeaderWidth,mPinnedHeaderHeight - delta);
+                        //mPinnedHeader.layout(0,-delta,mPinnedHeaderWidth,mPinnedHeaderHeight - delta);
                     }else{
                         mPinnedHeader.layout(0,0,mPinnedHeaderWidth,mPinnedHeaderHeight);
                     }

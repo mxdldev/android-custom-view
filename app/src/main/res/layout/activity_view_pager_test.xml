@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-<com.mxdl.customview.test.view.MyViewPager
+<com.mxdl.customview.test.view.MyViewPager1
     android:id="@+id/view_my_pager"
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>

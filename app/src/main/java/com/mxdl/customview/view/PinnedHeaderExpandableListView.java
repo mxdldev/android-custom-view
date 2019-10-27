@@ -64,10 +64,12 @@ public class PinnedHeaderExpandableListView extends ExpandableListView {
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                int firstPosition = getFirstVisiblePosition();
-                int firstGroup = getPackedPositionGroup(getExpandableListPosition(firstPosition));
-
-                int nextPosition = firstPosition + 1;
+                //int firstVisiblePosition = getFirstVisiblePosition();
+                if(mPinnedHeader == null){
+                    return;
+                }
+                int firstGroup = getPackedPositionGroup(getExpandableListPosition(firstVisibleItem));
+                int nextPosition = firstVisibleItem + 1;
                 int nextGroup = getPackedPositionGroup(getExpandableListPosition(nextPosition));
                 View childView = getChildAt(1);
                 if(childView == null){
@@ -77,14 +79,14 @@ public class PinnedHeaderExpandableListView extends ExpandableListView {
                 if(nextGroup == firstGroup + 1){
                     if(top <= mPinnedHeaderHeight){
                         int delta = mPinnedHeaderHeight - top;
-                        //mPinnedHeader.layout(0,-delta,mPinnedHeaderWidth,mPinnedHeaderHeight - delta);
+                        mPinnedHeader.layout(0,-delta,mPinnedHeaderWidth,mPinnedHeaderHeight - delta);
                     }else{
                         mPinnedHeader.layout(0,0,mPinnedHeaderWidth,mPinnedHeaderHeight);
                     }
                 }else{
                     mPinnedHeader.layout(0,0,mPinnedHeaderWidth,mPinnedHeaderHeight);
-                    mTxtHeaderTitle.setText("item_sticky_group-"+firstGroup);
                 }
+                mTxtHeaderTitle.setText("item_sticky_group-"+firstGroup);
             }
         });
     }

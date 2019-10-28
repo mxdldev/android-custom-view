@@ -3,6 +3,7 @@ package com.mxdl.customview;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -28,6 +29,7 @@ public class StickyLayoutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sticky_layout);
+
         mExpandableListView = findViewById(R.id.view_expand_listview);
         mExpandableListView.setAdapter(new ExpandableListViewAdapter(this));
         for (int i = 0; i < 3; i++) {

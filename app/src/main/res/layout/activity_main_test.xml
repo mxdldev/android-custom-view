@@ -24,5 +24,11 @@
         android:text="ViewPagerTest"
         android:textAllCaps="false"
         />
-
+    <Button
+        android:id="@+id/btn_coordinator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CoordinatorLayout"
+        android:textAllCaps="false"
+        />
 </LinearLayout>

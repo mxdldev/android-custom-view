@@ -109,8 +109,10 @@ public class StickyLayout extends LinearLayout {
                 }else if(Math.abs(dx) > Math.abs(dy)){
                     intercept = false;
                 }else if(mState == mStateExpand && dy <= - mScaledTouchSlop){
+                    //上滑
                     intercept = true;
                 }else if(mGiveUpTouchEventListener != null && mGiveUpTouchEventListener.giveUpTouchEvent() && dy > mScaledTouchSlop){
+                    //下滑
                     intercept = true;
                 }else{
                     intercept = false;

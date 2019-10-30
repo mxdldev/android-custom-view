@@ -5,8 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ExpandableListView;
 
 import com.mxdl.customview.R;
+import com.mxdl.customview.test.view1.ExpandableListView2Activity;
+import com.mxdl.customview.test.view1.SticyLayout2Activity;
+import com.mxdl.customview.test.view1.ViewPagerTest2Activity;
 
 public class MainTestActivity extends AppCompatActivity implements View.OnClickListener{
     @Override
@@ -17,6 +21,9 @@ public class MainTestActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.btn_scroll_to).setOnClickListener(this);
         findViewById(R.id.btn_view_pager).setOnClickListener(this);
         findViewById(R.id.btn_coordinator).setOnClickListener(this);
+        findViewById(R.id.btn_view_pager2).setOnClickListener(this);
+        findViewById(R.id.btn_view_expand).setOnClickListener(this);
+        findViewById(R.id.btn_view_sticy2).setOnClickListener(this);
     }
 
     @Override
@@ -33,6 +40,15 @@ public class MainTestActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.btn_coordinator:
                 startActivity(new Intent(this,CoordinatorLayoutTestActivity.class));
+                break;
+            case R.id.btn_view_pager2:
+                startActivity(new Intent(this, ViewPagerTest2Activity.class));
+                break;
+            case R.id.btn_view_expand:
+                startActivity(new Intent(this, ExpandableListView2Activity.class));
+                break;
+            case R.id.btn_view_sticy2:
+                startActivity(new Intent(this, SticyLayout2Activity.class));
                 break;
         }
 

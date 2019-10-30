@@ -31,4 +31,25 @@
         android:text="CoordinatorLayout"
         android:textAllCaps="false"
         />
+    <Button
+        android:id="@+id/btn_view_pager2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ViewPager2"
+        android:textAllCaps="false"
+        />
+    <Button
+        android:id="@+id/btn_view_expand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ExpandableListView2"
+        android:textAllCaps="false"
+        />
+    <Button
+        android:id="@+id/btn_view_sticy2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SticyLayout2"
+        android:textAllCaps="false"
+        />
 </LinearLayout>

@@ -8,7 +8,10 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.widget.DigitalClock;
 import android.widget.LinearLayout;
+
+import com.mxdl.customview.R;
 
 /**
  * Description: <协调式折叠布局><br>
@@ -36,6 +39,7 @@ import android.widget.LinearLayout;
  * 2.设置高度的是极端值条件搞错【第二个判断写错了】
  * 3.onTouchEvent方法最后好返回true
  * 4.setHeaderHeight方法最后要给currHeaderHeight重新赋值
+ * 5.onInterceptTouchEvent方法mLastInterceptY赋值不对导致的事件没有被拦截
  */
 public class StickyLayout extends LinearLayout {
     private View headerView;
@@ -80,6 +84,7 @@ public class StickyLayout extends LinearLayout {
         if(hasWindowFocus && headerView == null){
             int headerId = getResources().getIdentifier("sticky_header", "id", getContext().getPackageName());
             headerView = findViewById(headerId);
+            headerView = findViewById(R.id.sticky_header);
             if(headerView != null){
                 mOriginHeaderHeight = headerView.getMeasuredHeight();
                 mCurrHeaderHeight = mOriginHeaderHeight;

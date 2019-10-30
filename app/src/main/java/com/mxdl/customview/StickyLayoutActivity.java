@@ -23,7 +23,6 @@ public class StickyLayoutActivity extends AppCompatActivity {
     private PinnedHeaderExpandableListView mExpandableListView;
     private StickyLayout mStickyLayout;
 
-
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +31,7 @@ public class StickyLayoutActivity extends AppCompatActivity {
 
         mExpandableListView = findViewById(R.id.view_expand_listview);
         mExpandableListView.setAdapter(new ExpandableListViewAdapter(this));
-        
+
         for (int i = 0; i < 3; i++) {
             mExpandableListView.expandGroup(i);
         }

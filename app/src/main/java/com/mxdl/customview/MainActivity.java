@@ -3,6 +3,7 @@ package com.mxdl.customview;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,6 +12,9 @@ import android.widget.Button;
 import com.mxdl.customview.test.MainTestActivity;
 import com.mxdl.customview.test.ScrollTestActivity;
 import com.mxdl.customview.test.SmoothScrollTestActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Description: <MainActivity><br>
@@ -46,6 +50,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnCricleCapture.setOnClickListener(this);
         mBtnRectCapture.setOnClickListener(this);
 
+        List<Integer> list = new ArrayList();
+        if(list == null || list.size() == 0){
+            Log.v("MYTAG1","no data");
+        }else{
+            Log.v("MYTAG1","have data");
+        }
     }
 
     @Override

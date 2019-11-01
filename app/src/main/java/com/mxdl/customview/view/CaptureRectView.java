@@ -38,7 +38,8 @@ public class CaptureRectView extends View {
     private int mLastX;
     private int mLastY;
     private int mHitCorner;
-
+    private Rect reverseRect = new Rect();
+    private Path reversePath = new Path();
     public CaptureRectView(Context context) {
         super(context);
         initView();
@@ -96,14 +97,46 @@ public class CaptureRectView extends View {
         canvas.save();
         //路径重新设置
         mCapturePath.reset();
-        //添加了一个当前的矩形区域
         mCapturePath.addRect(new RectF(mCaptureRect), Path.Direction.CW);
         //当前的画布与指定的路径相交
         canvas.clipPath(mCapturePath, Region.Op.INTERSECT);
         //画矩形背景选区
         canvas.drawRect(mScreenRect, mAreaPaint);
         //画矩形背景边框
-        canvas.drawPath(mCapturePath, mBorderPaint);
+
+        //添加了一个当前的矩形区域
+        boolean reverse = false;
+        if(mCaptureRect.left > mCaptureRect.right){
+            reverse = true;
+            reversePath.reset();
+            reverseRect.left = mCaptureRect.right;
+            reverseRect.right = mCaptureRect.left;
+
+            if(mCaptureRect.top > mCaptureRect.bottom){
+                reverseRect.top = mCaptureRect.bottom;
+                reverseRect.bottom = mCaptureRect.top;
+            }else{
+                reverseRect.top = mCaptureRect.top;
+                reverseRect.bottom = mCaptureRect.bottom;
+            }
+        }else if(mCaptureRect.top > mCaptureRect.bottom){
+            reverse = true;
+            reversePath.reset();
+            reverseRect.top = mCaptureRect.bottom;
+            reverseRect.bottom = mCaptureRect.top;
+
+            reverseRect.left = mCaptureRect.left;
+            reverseRect.right = mCaptureRect.right;
+        }
+
+        if(reverse){
+            reversePath.addRect(new RectF(reverseRect), Path.Direction.CW);
+            canvas.drawPath(reversePath, mBorderPaint);
+            Log.v("MYTAG","========================================"+reverseRect.toString());
+        } else{
+            canvas.drawPath(mCapturePath, mBorderPaint);
+        }
+        Log.v("MYTAG",mCaptureRect.toString());
         canvas.restore();
 
         //画左上锚点
@@ -189,6 +222,7 @@ public class CaptureRectView extends View {
                 if (mCaptureRect.bottom <= mHalfAnchorWidth) {
                     mCaptureRect.bottom = mHalfAnchorWidth;
                 }
+
                 boolean square = true;
                 if (Math.abs(mCaptureRect.right - mCaptureRect.left) != Math.abs(mCaptureRect.bottom - mCaptureRect.top)) {
                     square = false;

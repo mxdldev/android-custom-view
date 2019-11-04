@@ -1,12 +1,18 @@
 package com.mxdl.customview;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.PixelFormat;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 
 import com.mxdl.customview.test.MainTestActivity;
@@ -31,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mBtnCaptrueView;
     private Button mBtnCricleCapture;
     private Button mBtnRectCapture;
+    private WindowManager.LayoutParams mLayoutParams;
+    private WindowManager mWindowManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +58,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnCricleCapture.setOnClickListener(this);
         mBtnRectCapture.setOnClickListener(this);
 
-        List<Integer> list = new ArrayList();
-        if(list == null || list.size() == 0){
-            Log.v("MYTAG1","no data");
-        }else{
-            Log.v("MYTAG1","have data");
-        }
     }
 
     @Override

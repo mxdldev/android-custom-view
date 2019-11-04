@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mxdl.customview">
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <application
         android:name="com.mxdl.MyApplication"
         android:allowBackup="true"
@@ -10,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".test.view1.SticyLayout2Activity"></activity>
+        <activity android:name=".WindowManagerActivity"></activity>
+        <activity android:name=".test.view1.SticyLayout2Activity" />
         <activity android:name=".test.view1.ExpandableListView2Activity" />
         <activity android:name=".test.view1.ViewPagerTest2Activity" />
         <activity

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <Button
+        android:id="@+id/btn_add_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="AddView"
+        android:textAllCaps="false"
+        />
+</RelativeLayout>

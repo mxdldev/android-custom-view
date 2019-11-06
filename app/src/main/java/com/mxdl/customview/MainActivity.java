@@ -82,6 +82,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, CaptureCricleViewActivity.class));
                 break;
         }
+
+
     }
 
     @Override

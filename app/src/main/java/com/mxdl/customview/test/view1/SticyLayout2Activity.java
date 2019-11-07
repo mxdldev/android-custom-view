@@ -1,6 +1,6 @@
 package com.mxdl.customview.test.view1;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.mxdl.customview.R;

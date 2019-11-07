@@ -1,26 +1,16 @@
 package com.mxdl.customview;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.PixelFormat;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
 import com.mxdl.customview.test.MainTestActivity;
-import com.mxdl.customview.test.ScrollTestActivity;
-import com.mxdl.customview.test.SmoothScrollTestActivity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Description: <MainActivity><br>

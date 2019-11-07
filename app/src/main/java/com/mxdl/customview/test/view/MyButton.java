@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.widget.Button;
 
 import com.mxdl.customview.util.MotionEventUtil;
 
@@ -15,7 +14,7 @@ import com.mxdl.customview.util.MotionEventUtil;
  * Version:     V1.0.0<br>
  * Update:     <br>
  */
-public class MyButton extends android.support.v7.widget.AppCompatButton {
+public class MyButton extends androidx.appcompat.widget.AppCompatButton {
     public MyButton(Context context) {
         super(context);
     }

@@ -1,17 +1,15 @@
 package com.mxdl.customview;
 
-import android.app.NotificationManager;
 import android.content.Context;
 import android.graphics.PixelFormat;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class WindowManagerActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener {
 

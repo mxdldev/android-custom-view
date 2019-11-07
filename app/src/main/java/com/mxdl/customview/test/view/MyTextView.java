@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.widget.TextView;
 
 import com.mxdl.customview.util.MotionEventUtil;
 
@@ -15,7 +14,7 @@ import com.mxdl.customview.util.MotionEventUtil;
  * Version:     V1.0.0<br>
  * Update:     <br>
  */
-public class MyTextView extends android.support.v7.widget.AppCompatTextView {
+public class MyTextView extends androidx.appcompat.widget.AppCompatTextView {
     public MyTextView(Context context) {
         super(context);
     }

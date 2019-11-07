@@ -3,7 +3,6 @@ package com.mxdl.customview.test.view;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.Scroller;
-import android.widget.TextView;
 
 /**
  * Description: <TestTextView><br>
@@ -12,7 +11,7 @@ import android.widget.TextView;
  * Version:     V1.0.0<br>
  * Update:     <br>
  */
-public class TestTextView extends android.support.v7.widget.AppCompatTextView{
+public class TestTextView extends androidx.appcompat.widget.AppCompatTextView{
 
     private Scroller mScroller;
 

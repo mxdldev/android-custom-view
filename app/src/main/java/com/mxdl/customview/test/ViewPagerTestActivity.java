@@ -1,18 +1,15 @@
 package com.mxdl.customview.test;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mxdl.customview.R;
-import com.mxdl.customview.test.view.MyTextView;
-import com.mxdl.customview.test.view.MyViewPager;
 import com.mxdl.customview.test.view.MyViewPager1;
 import com.mxdl.customview.util.MotionEventUtil;
 

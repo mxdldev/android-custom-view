@@ -27,8 +27,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mBtnCaptrueView;
     private Button mBtnCricleCapture;
     private Button mBtnRectCapture;
-    private WindowManager.LayoutParams mLayoutParams;
-    private WindowManager mWindowManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

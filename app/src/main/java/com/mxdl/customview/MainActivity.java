@@ -1,5 +1,6 @@
 package com.mxdl.customview;
 
+import android.app.Service;
 import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mBtnCaptrueView;
     private Button mBtnCricleCapture;
     private Button mBtnRectCapture;
+    private Button mBtnService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnCaptrueView = findViewById(R.id.btn_capture_square);
         mBtnCricleCapture = findViewById(R.id.btn_capture_cricle);
         mBtnRectCapture = findViewById(R.id.btn_capture_rect);
+        mBtnService = findViewById(R.id.btn_service);
 
         mBtnStickyLayout.setOnClickListener(this);
         mBtnHorizontalScrollViewEx.setOnClickListener(this);
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnCaptrueView.setOnClickListener(this);
         mBtnCricleCapture.setOnClickListener(this);
         mBtnRectCapture.setOnClickListener(this);
+        mBtnService.setOnClickListener(this);
 
     }
 
@@ -68,6 +72,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_capture_cricle:
                 startActivity(new Intent(this, CaptureCricleViewActivity.class));
+                break;
+            case R.id.btn_service:
+                startActivity(new Intent(this, TestServiceActivity.class));
                 break;
         }
 

@@ -30,12 +30,14 @@ public class TestServiceActivity extends AppCompatActivity {
                 bindService();
             }
         });
+        startService(new Intent());
     }
 
     private void bindService() {
         bindService(new Intent(TestServiceActivity.this, TestService1.class), new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
+            ITest iTest = ITest.Stub.asInterface(service);
             mMyService = IMyAidlInterface.Stub.asInterface(service);
             //mMyService = (IMyAidlInterface) service;
             Log.v("MYTAG","onServiceConnected succ");

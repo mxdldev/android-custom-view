@@ -30,7 +30,7 @@ public class TestServiceActivity extends AppCompatActivity {
                 bindService();
             }
         });
-        startService(new Intent());
+        //startService(new Intent());
     }
 
     private void bindService() {

@@ -21,17 +21,16 @@ Activity -> ContextWraper: 1.startService
 ContextWraper -> ContextImpl: 2.startService
 ContextImpl -> ContextImpl: 3.startServiceCommon
 ContextImpl -> ActivityManagerService: 4.startService
-ActivityManagerService -> ActiveService: 5.startService
-ActiveService -> ActiveService: 6.startServiceLocked
-ActiveService -> ActiveService: 7.startServiceInnerLocked
-ActiveService -> ActiveService: 8.bringUpServiceLocked
-ActiveService -> ActiveService: 9.realStartServiceLocked
-ActiveService -> ApplicationThread: 10.scheduleCreateService
-ApplicationThread -> ActivityThread: 11.handleCreateService
-ActivityThread -> Service: 12.onCreate
-ActiveService -> ActiveService:13.sendServiceArgsLocked
-ActiveService -> ApplicationThread:14.scheduleServiceArgs
-ApplicationThread -> ActivityThread:15.handleServiceArgs
-ActivityThread -> Service:16.onStartCommand
+ActivityManagerService -> ActiveService: 5.startServiceLocked
+ActiveService -> ActiveService: 6.startServiceInnerLocked
+ActiveService -> ActiveService: 7.bringUpServiceLocked
+ActiveService -> ActiveService: 8.realStartServiceLocked
+ActiveService -> ApplicationThread: 9.scheduleCreateService
+ApplicationThread -> ActivityThread: 10.handleCreateService
+ActivityThread -> Service: 11.onCreate
+ActiveService -> ActiveService:12.sendServiceArgsLocked
+ActiveService -> ApplicationThread:13.scheduleServiceArgs
+ApplicationThread -> ActivityThread:14.handleServiceArgs
+ActivityThread -> Service:15.onStartCommand
 
 @enduml

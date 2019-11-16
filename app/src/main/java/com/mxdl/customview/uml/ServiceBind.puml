@@ -1,0 +1,43 @@
+@startuml
+' Activity.startService
+' ContextWraper.startService
+' ContextImpl.startService
+' ContextImpl.startServiceCommon
+' ActivityManagerService.startService
+' ActiveService.startServiceLocked
+' ActiveService.startServiceInnerLocked
+' ActiveService.bringUpServiceLocked
+' ActiveService.realStartServiceLocked
+' ApplicationThread.scheduleCreateService
+' ActivityThread.handleCreateService
+' Service.onCreate
+'
+' ActiveService.sendServiceArgsLocked
+' ApplicationThread.scheduleServiceArgs
+' ActivityThread.handleServiceArgs
+' Service.onStartCommand
+
+Activity -> ContextWraper: 1.startService
+ContextWraper -> ContextImpl: 2.startService
+ContextImpl -> ContextImpl: 3.startServiceCommon
+ContextImpl -> ActivityManagerService: 4.startService
+ActivityManagerService -> ActiveService: 5.startServiceLocked
+ActiveService -> ActiveService: 6.startServiceInnerLocked
+ActiveService -> ActiveService: 7.bringUpServiceLocked
+ActiveService -> ActiveService: 8.realStartServiceLocked
+ActiveService -> ApplicationThread: 9.scheduleCreateService
+ApplicationThread -> ActivityThread: 10.handleCreateService
+ActivityThread -> Service: 11.onCreate
+
+ActiveService -> ActiveService: 12.requestServiceBindingLocked
+ActiveService -> ApplicationThread:13.scheduleBindService
+ApplicationThread -> ActivityThread:14.handleBindService
+ActivityThread -> Service:15.onBind
+ActivityThread -> ActivityManagerService:16.publishService
+ActivityManagerService -> ActiveService:17.publishServiceLocked
+ActiveService -> InnerConnection:18.connected
+InnerConnection -> ServiceDispatcher:19.connected
+ServiceDispatcher -> RunConnection:20.run
+RunConnection -> ServiceDispatcher:21.doConnected
+ServiceDispatcher -> ServiceConnection:22.onServiceConnected
+@enduml

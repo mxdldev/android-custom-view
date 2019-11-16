@@ -13,22 +13,18 @@ public class TestService1 extends Service {
 
     @Override
     public void onCreate() {
-        Log.v("MYTAG","onCreate");
+        Log.v("MYTAG","onCreate start...");
         binder = new MyService();
     }
-
-    public TestService1() {
-    }
-
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.v("MYTAG","onStartCommand");
+        Log.v("MYTAG","onStartCommand start...");
         return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.v("MYTAG","onBind");
+        Log.v("MYTAG","onBind start...");
       return   binder;
     }
     class MyService extends IMyAidlInterface.Stub{

@@ -8,6 +8,8 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.mxdl.customview.TestServiceActivity;
+
 /**
  * Description: <TestService><br>
  * Author:      mxdl<br>
@@ -15,23 +17,37 @@ import androidx.annotation.Nullable;
  * Version:     V1.0.0<br>
  * Update:     <br>
  */
-public class TestService extends Service{
-    MyService bind;
+public class TestService extends Service implements IMyService{
+    public static String TAG = TestService.class.getSimpleName();
+    MyService binder;
+
     @Override
     public void onCreate() {
-        bind = new MyService();
+        Log.v(TAG, "onCreate start...");
+        binder = new MyService();
     }
 
-    @Nullable
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.v(TAG, "onStartCommand start...");
+        return super.onStartCommand(intent, flags, startId);
+    }
+
     @Override
     public IBinder onBind(Intent intent) {
-        return bind;
+        Log.v(TAG, "onBind start...");
+        return binder;
     }
-    class MyService extends Binder implements IMyService{
 
+    @Override
+    public void test() {
+        Log.v(TAG, "hello world...");
+    }
+
+    class MyService extends Binder implements IMyService {
         @Override
         public void test() {
-            Log.v("MYTAG","hello world...");
+            TestService.this.test();
         }
     }
 }

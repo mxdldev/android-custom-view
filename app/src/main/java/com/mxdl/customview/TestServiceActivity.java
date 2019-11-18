@@ -28,6 +28,7 @@ public class TestServiceActivity extends AppCompatActivity {
             }
         });
         //startService(new Intent(TestServiceActivity.this, TestService.class));
+        sendBroadcast(new Intent());
     }
 
     private void bindService() {

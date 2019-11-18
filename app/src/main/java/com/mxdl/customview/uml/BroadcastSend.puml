@@ -1,0 +1,25 @@
+@startuml
+'ContextImpl.sendBroadcast
+'ActivityManagerService.broadcastIntent
+'ActivityManagerService.broadcastIntentLocked
+'BroadcastQueue.scheduleBroadcastsLocked
+'BroadcastQueue.processNextBroadcastLocked
+'BroadcastQueue.deliverToRegisteredReceiverLocked
+'BroadcastQueue.performReceiveLocked
+'ApplicationThread.scheduleRegisteredReceiver
+'InnerReceiver.performReceive
+'ReceiverDispatcher.performReceive
+'BroadcastReceiver.onReceive
+Activity -> ContextWraper: sendBroadcast
+ContextWraper -> ContextImpl: sendBroadcast
+ContextImpl -> ActivityManagerService: broadcastIntent
+ActivityManagerService -> ActivityManagerService: broadcastIntentLocked
+ActivityManagerService -> BroadcastQueue: scheduleBroadcastsLocked
+BroadcastQueue -> BroadcastQueue: processNextBroadcastLocked
+BroadcastQueue -> BroadcastQueue: deliverToRegisteredReceiverLocked
+BroadcastQueue -> BroadcastQueue: performReceiveLocked
+BroadcastQueue -> ApplicationThread: scheduleRegisteredReceiver
+ApplicationThread -> InnerReceiver: performReceive
+InnerReceiver -> ReceiverDispatcher: performReceive
+ReceiverDispatcher -> BroadcastReceiver: onReceive
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+'ContextWraper.registerReceiver
+'ContextImpl.registerReceiver
+'ContextImpl.registerReceiverInternal
+'ActivityManagerService.registerReceiver
+Activity -> ContextWraper:registerReceiver
+ContextWraper ->ContextImpl:registerReceiver
+ContextImpl ->ContextImpl:registerReceiverInternal
+ContextImpl ->ActivityManagerService:registerReceiver
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+
+'ContentResolver.query
+'ApplicationContentResolver.query
+'ActivityThread.acquireProvider
+'ActivityManagerService.getContentProvider
+'Transport.query
+'ContentProvider.query
+ContextImpl -> ContentResolver :query
+ContentResolver -> ApplicationContentResolver :query
+ApplicationContentResolver -> ActivityThread:acquireProvider
+ActivityThread -> ActivityManagerService:getContentProvider
+ActivityManagerService -> Transport:query
+Transport -> ContentProvider:query
+@enduml

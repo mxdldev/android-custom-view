@@ -1,0 +1,23 @@
+@startuml
+'ActivityThread.main
+'ActivityThread.attach
+'ActivityManagerService.attachApplication
+'ActivityManagerService.attachApplicationLocked
+'ApplicationThread.bindApplication
+'ActivityThread.handleBindApplication
+'ActivityThread.installContentProviders
+'ActivityThread.installProvider
+'ContentProvider.attachInfo
+'ContentProvider.onCreate
+ActivityThread -> ActivityThread : main
+ActivityThread -> ActivityThread :attach
+ActivityThread -> ActivityManagerService:attachApplication
+ActivityManagerService -> ActivityManagerService:attachApplicationLocked
+ActivityManagerService -> ApplicationThread:bindApplication
+ApplicationThread -> ActivityThread:handleBindApplication
+ActivityThread -> ActivityThread :installContentProviders
+ActivityThread -> ActivityThread :installContentProviders
+ActivityThread -> ActivityThread :installProvider
+ActivityThread -> ContentProvider :attachInfo
+ContentProvider -> ContentProvider :onCreate
+@enduml

@@ -61,18 +61,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnRectCapture.setOnClickListener(this);
         mBtnService.setOnClickListener(this);
 
-
-
-    }
-
-    @TargetApi(Build.VERSION_CODES.N)
-    public Locale getCurrentLocale() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            return getResources().getConfiguration().getLocales().get(0);
-        } else {
-            //noinspection deprecation
-            return getResources().getConfiguration().locale;
-        }
     }
 
     @Override
@@ -98,11 +86,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_service:
                 startActivity(new Intent(this, TestServiceActivity.class));
-
-                Uri uri = Uri.parse("content://com.test.provider");
-                getContentResolver().query(uri,null,null,null,null);
-                getContentResolver().query(uri,null,null,null,null);
-                getContentResolver().query(uri,null,null,null,null);
                 break;
         }
 

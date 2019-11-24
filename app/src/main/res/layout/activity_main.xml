@@ -56,5 +56,11 @@
             android:layout_height="wrap_content"
             android:text="TestService"
             android:textAllCaps="false" />
+        <Button
+            android:id="@+id/btn_async_task"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TestAsyncTask"
+            android:textAllCaps="false" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

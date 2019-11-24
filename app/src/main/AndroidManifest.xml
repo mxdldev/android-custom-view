@@ -12,12 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".AsyncTaskActivity"></activity>
+
         <provider
             android:name=".provider.MyContentProvider"
             android:authorities="com.test.provider"
-            android:process=":remote"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true"
+            android:process=":remote" />
 
         <service
             android:name=".service.TestService1"

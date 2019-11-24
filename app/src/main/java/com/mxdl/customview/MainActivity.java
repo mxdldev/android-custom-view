@@ -1,28 +1,16 @@
 package com.mxdl.customview;
 
-import android.annotation.TargetApi;
-import android.app.Service;
 import android.content.Intent;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 
 import com.mxdl.customview.test.MainTestActivity;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 /**
  * Description: <MainActivity><br>
@@ -40,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mBtnCricleCapture;
     private Button mBtnRectCapture;
     private Button mBtnService;
+    private Button mBtnAsyncTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnCricleCapture = findViewById(R.id.btn_capture_cricle);
         mBtnRectCapture = findViewById(R.id.btn_capture_rect);
         mBtnService = findViewById(R.id.btn_service);
-
+        mBtnAsyncTask = findViewById(R.id.btn_async_task);
         mBtnStickyLayout.setOnClickListener(this);
         mBtnHorizontalScrollViewEx.setOnClickListener(this);
         mBtnPinnedHeader.setOnClickListener(this);
@@ -60,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnCricleCapture.setOnClickListener(this);
         mBtnRectCapture.setOnClickListener(this);
         mBtnService.setOnClickListener(this);
-
+        mBtnAsyncTask.setOnClickListener(this);
     }
 
     @Override
@@ -86,6 +75,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_service:
                 startActivity(new Intent(this, TestServiceActivity.class));
+                break;
+            case R.id.btn_async_task:
+                startActivity(new Intent(this,AsyncTaskActivity.class));
                 break;
         }
 

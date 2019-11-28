@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TestAsyncTaskActivity"></activity>
+        <activity android:name=".bitmap.test.TestCacheActivity"></activity>
+        <activity android:name=".TestAsyncTaskActivity" />
 
         <provider
             android:name=".provider.MyContentProvider"
@@ -53,7 +54,7 @@
         <activity android:name=".HorizontalScrollViewExActivity" />
 
         <service android:name=".service.TestService" />
-        <service android:name=".thread.MyIntentService"/>
+        <service android:name=".thread.MyIntentService" />
     </application>
 
 </manifest>

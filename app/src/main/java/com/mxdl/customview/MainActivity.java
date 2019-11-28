@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.mxdl.customview.bitmap.DiskLruCache;
+import com.mxdl.customview.bitmap.test.TestCacheActivity;
 import com.mxdl.customview.test.MainTestActivity;
 import com.mxdl.customview.thread.MyAsyncTask;
 
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mBtnRectCapture;
     private Button mBtnService;
     private Button mBtnAsyncTask;
+    private Button mBtnCache;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnRectCapture = findViewById(R.id.btn_capture_rect);
         mBtnService = findViewById(R.id.btn_service);
         mBtnAsyncTask = findViewById(R.id.btn_async_task);
+        mBtnCache = findViewById(R.id.btn_cache);
 
         mBtnStickyLayout.setOnClickListener(this);
         mBtnHorizontalScrollViewEx.setOnClickListener(this);
@@ -56,12 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnRectCapture.setOnClickListener(this);
         mBtnService.setOnClickListener(this);
         mBtnAsyncTask.setOnClickListener(this);
-
-        final long DISK_CACHE_SIZE = 1024 * 1024 * 50; //50MB
-        File diskCacheDir = getBaseContext().getCacheDir();
-        if (!diskCacheDir.exists()) {
-            diskCacheDir.mkdirs();
-        }
+        mBtnCache.setOnClickListener(this);
 
     }
 
@@ -91,6 +89,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_async_task:
                 startActivity(new Intent(this, TestAsyncTaskActivity.class));
+                break;
+            case R.id.btn_cache:
+                startActivity(new Intent(this, TestCacheActivity.class));
                 break;
         }
 

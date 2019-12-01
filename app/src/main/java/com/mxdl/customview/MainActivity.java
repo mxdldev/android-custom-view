@@ -10,8 +10,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.mxdl.customview.bitmap.DiskLruCache;
+import com.mxdl.customview.bitmap.test.TestCacheActivity;
 import com.mxdl.customview.test.MainTestActivity;
+import com.mxdl.customview.thread.MyAsyncTask;
 
+<<<<<<< HEAD
+=======
+import java.io.File;
+import java.io.IOException;
+
+>>>>>>> 75c4ddacbcbe9ad40d193590d1449f1fd1c37ad1
 /**
  * Description: <MainActivity><br>
  * Author:      mxdl<br>
@@ -29,6 +38,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mBtnRectCapture;
     private Button mBtnService;
     private Button mBtnAsyncTask;
+<<<<<<< HEAD
+=======
+    private Button mBtnCache;
+>>>>>>> 75c4ddacbcbe9ad40d193590d1449f1fd1c37ad1
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +55,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnRectCapture = findViewById(R.id.btn_capture_rect);
         mBtnService = findViewById(R.id.btn_service);
         mBtnAsyncTask = findViewById(R.id.btn_async_task);
+<<<<<<< HEAD
+=======
+        mBtnCache = findViewById(R.id.btn_cache);
+
+>>>>>>> 75c4ddacbcbe9ad40d193590d1449f1fd1c37ad1
         mBtnStickyLayout.setOnClickListener(this);
         mBtnHorizontalScrollViewEx.setOnClickListener(this);
         mBtnPinnedHeader.setOnClickListener(this);
@@ -50,6 +68,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnRectCapture.setOnClickListener(this);
         mBtnService.setOnClickListener(this);
         mBtnAsyncTask.setOnClickListener(this);
+<<<<<<< HEAD
+=======
+        mBtnCache.setOnClickListener(this);
+
+>>>>>>> 75c4ddacbcbe9ad40d193590d1449f1fd1c37ad1
     }
 
     @Override
@@ -77,7 +100,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, TestServiceActivity.class));
                 break;
             case R.id.btn_async_task:
+<<<<<<< HEAD
                 startActivity(new Intent(this,AsyncTaskActivity.class));
+=======
+                startActivity(new Intent(this, TestAsyncTaskActivity.class));
+                break;
+            case R.id.btn_cache:
+                startActivity(new Intent(this, TestCacheActivity.class));
+>>>>>>> 75c4ddacbcbe9ad40d193590d1449f1fd1c37ad1
                 break;
         }
 

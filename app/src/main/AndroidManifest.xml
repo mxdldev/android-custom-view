@@ -13,6 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".AsyncTaskActivity"></activity>
+        <activity android:name=".bitmap.test.TestCacheActivity"></activity>
+        <activity android:name=".TestAsyncTaskActivity" />
 
         <provider
             android:name=".provider.MyContentProvider"
@@ -26,7 +28,7 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".TestServiceActivity" />
+        <activity android:name=".TestServiceActivity"  android:hardwareAccelerated="true"/>
         <activity android:name=".WindowManagerActivity" />
         <activity android:name=".test.view1.SticyLayout2Activity" />
         <activity android:name=".test.view1.ExpandableListView2Activity" />
@@ -53,6 +55,7 @@
         <activity android:name=".HorizontalScrollViewExActivity" />
 
         <service android:name=".service.TestService" />
+        <service android:name=".thread.MyIntentService" />
     </application>
 
 </manifest>

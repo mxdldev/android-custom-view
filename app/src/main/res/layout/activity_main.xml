@@ -62,5 +62,14 @@
             android:layout_height="wrap_content"
             android:text="TestAsyncTask"
             android:textAllCaps="false" />
+<<<<<<< HEAD
+=======
+        <Button
+            android:id="@+id/btn_cache"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cache"
+            android:textAllCaps="false" />
+>>>>>>> 75c4ddacbcbe9ad40d193590d1449f1fd1c37ad1
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

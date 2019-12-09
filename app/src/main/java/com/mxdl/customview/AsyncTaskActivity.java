@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 
 import com.mxdl.customview.thread.MyAsyncTask;
@@ -17,11 +18,11 @@ public class AsyncTaskActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_async_task);
-        AsyncTask<String, Integer, String> execute = new MyAsyncTask().execute("www.baidu.com");
-        new MyAsyncTask().execute("www.baidu.com1");
-        new MyAsyncTask().execute("www.baidu.com2");
-        new MyAsyncTask().execute("www.baidu.com3");
-        new MyAsyncTask().execute("www.baidu.com4");
+//        AsyncTask<String, Integer, String> execute = new MyAsyncTask().execute("www.baidu.com");
+//        new MyAsyncTask().execute("www.baidu.com1");
+//        new MyAsyncTask().execute("www.baidu.com2");
+//        new MyAsyncTask().execute("www.baidu.com3");
+//        new MyAsyncTask().execute("www.baidu.com4");
 
 //        ExecutorService executorService = Executors.newFixedThreadPool(3);
 //        for(int i = 0; i < 10; i++){
@@ -33,9 +34,13 @@ public class AsyncTaskActivity extends AppCompatActivity {
 //                }
 //            });
 //        }
-        test((String)null);
+        test((String) null);
     }
-    public void test(String str){
+
+    public void test(String str) {
 
     }
+
+
 }
+

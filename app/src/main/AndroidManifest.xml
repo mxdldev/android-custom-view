@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AsyncTaskActivity"></activity>
+        <activity android:name=".AsyncTaskActivity" ></activity>
         <activity android:name=".bitmap.test.TestCacheActivity"></activity>
         <activity android:name=".TestAsyncTaskActivity" />
 
@@ -28,7 +28,7 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".TestServiceActivity"  android:hardwareAccelerated="true"/>
+        <activity android:name=".TestServiceActivity"  android:hardwareAccelerated="true" android:screenOrientation="portrait" android:taskAffinity="com.test.aaa" />
         <activity android:name=".WindowManagerActivity" />
         <activity android:name=".test.view1.SticyLayout2Activity" />
         <activity android:name=".test.view1.ExpandableListView2Activity" />

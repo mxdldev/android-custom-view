@@ -6,11 +6,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.mxdl.customview.thread.MyAsyncTask;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class AsyncTaskActivity extends AppCompatActivity {
 
@@ -38,7 +41,15 @@ public class AsyncTaskActivity extends AppCompatActivity {
     }
 
     public void test(String str) {
+        Window window = getWindow();
+        WindowManager windowManager = getWindowManager();
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
 
+        ExecutorService executorService1 = Executors.newCachedThreadPool();
+
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(3);
+
+        ExecutorService executorService2 = Executors.newSingleThreadExecutor();
     }
 
 
